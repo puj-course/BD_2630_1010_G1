@@ -50,7 +50,7 @@
 |------|------|------|------|
 | Consultas 7, 8, 10, 11 | Jerónimo Lievano | release/semana3_subconsultas | semana3_subconsultas.sql|
 | Creacion de vistas |Camilo Aguilar & Sara Barreto|feature/vistas | vistas.sql|
-| Consulta 15| Sara Barreto| release/semana3_subconsultas | semana3_subconsultas|
+| Consulta 15| Sara Barreto| release/semana3_subconsultas | semana3_subconsultas.sql|
 |Actualización Changelog | Sara Barreto | feature/actualizar_changelog | CHANGELOG.md |
 
 ### Cambios principales
