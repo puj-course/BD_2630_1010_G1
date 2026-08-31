@@ -1,41 +1,14 @@
 # CHANGELOG
 
-Deben registrar el progreso semanal del proyecto, las tareas realizadas,
-los responsables y las ramas utilizadas en este documento.
-
----
 
 ## Equipo del Proyecto
 | Nombre        | GitHub / Perfil |
 |--------------|-----------------|
-| Estudiante 1 | github.com/usuario1 |
-| Estudiante 2 | github.com/usuario2 |
-| Estudiante 3 | github.com/usuario3 |
-| Estudiante 4 | github.com/usuario4 |
-| Estudiante 5 | github.com/usuario5 |
+| Estudiante 1 | github.com/Daiana-07        |
+| Estudiante 2 | github.com/jlievanob-ops    |
+| Estudiante 3 | github.com/kmilo1147-glitch |
 
 ---
-
-⚠️ **IMPORTANTE:**  
-La siguiente sección es **solo un ejemplo**.  
-**DEBEN BORRARLA cuando empiecen a registrar su propio progreso.**
-
----
-
-## Ejemplo - Semana 1 (BORRAR ESTA SECCIÓN)
-
-### Objetivos de la semana
-- Subir documentos de la Entrega 1
-- Ajustar observaciones
-- Definir consultas a implementar
-
-### Tareas realizadas
-
-| Tarea | Responsable(s) | Rama | Archivo(s) |
-|------|----------------|------|-----------|
-| Subir modelo ER | Ana | docs-modelo | docs/modelo_er.png |
-| Ajustar modelo lógico | Carlos | modelo-logico | docs/modelo_logico.md |
-| Definir lista de consultas | Laura | consultas-plan | docs/consultas_plan.md |
 
 ### Cambios principales
 - Se corrigió la relación entre `Mesa` y `Puesto`
@@ -44,32 +17,35 @@ La siguiente sección es **solo un ejemplo**.
 ### Problemas encontrados
 - Dudas sobre agregación por municipio
 
----
-# Registro real del proyecto
 
-## Semana 1 (16–22 marzo)
+## Semana 1 (24–30 agosto)
 
 ### Objetivos de la semana
 
-(Describan qué querían lograr esta semana)
+- Hacer Documento técnico. 
+- Hacer consultas 1, 2, 3, 4, 5, 6, 9, 12 y 13
 
 ### Tareas realizadas
 
-| Tarea | Responsable(s) | Rama utilizada | Descripción |
+| Tarea | Responsable(s) | Rama utilizada | Archivo(s) |
 |------|------|------|------|
-| | | | |
-| | | | |
-| | | | |
+|Hacer documento técnico | Camilo Aguilar | | |
+|Consultas 1 y 3 | Camilo Aguilar | feature/semana2_agregaciones | semana2_agregaciones.sql|
+|Consultas 2, 4 y 6 | Jerónimo Lievano | release/semana1_joins | semana1_joins.sql |
+|Diagrama ER | Jerónimo Lievano | feature/modelo_er_inicial | modelo_er_inicial.png |
+|Consultas 5, 9, 12, 13 | Sara Barreto  | feature/semana2_agregaciones | semana2__agregaciones.sql|
+
 
 ### Cambios principales
-
+- Se reconoció visualmente las relaciones y las tablas por el ERD
+- Se hicieron y definieron 9 consultas 
 
 ### Problemas encontrados
-
+--
 
 ---
 
-## Semana 2 (23–29 marzo)
+## Semana 2 (24–30 agosto)
 
 ### Objetivos de la semana
 
@@ -79,12 +55,13 @@ La siguiente sección es **solo un ejemplo**.
 
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
-| | | | |
-| | | | |
-| | | | |
+| Consultas 7, 8, 10, 11 | Jerónimo Lievano | release/semana3_subconsultas | semana3_subconsultas.sql|
+| Creacion de vistas |Camilo Aguilar & Sara Barreto| | |
+| Consulta 15| Sara Barreto| release/semana3_subconsultas | semana3_subconsultas|
 
 ### Cambios principales
-
+- Creacion de vistas 
+- Continuación de consultas
 
 ### Problemas encontrados
 
