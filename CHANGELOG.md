@@ -10,14 +10,6 @@
 
 ---
 
-### Cambios principales
-- Se corrigió la relación entre `Mesa` y `Puesto`
-- Se definieron 8 consultas de análisis electoral
-
-### Problemas encontrados
-- Dudas sobre agregación por municipio
-
-
 ## Semana 1 (24–30 agosto)
 
 ### Objetivos de la semana
@@ -29,11 +21,12 @@
 
 | Tarea | Responsable(s) | Rama utilizada | Archivo(s) |
 |------|------|------|------|
-|Hacer documento técnico | Camilo Aguilar | | |
+|Hacer documento técnico | Camilo Aguilar | feature/documento-tecnico|documento_tecnico.md |
 |Consultas 1 y 3 | Camilo Aguilar | feature/semana2_agregaciones | semana2_agregaciones.sql|
 |Consultas 2, 4 y 6 | Jerónimo Lievano | release/semana1_joins | semana1_joins.sql |
 |Diagrama ER | Jerónimo Lievano | feature/modelo_er_inicial | modelo_er_inicial.png |
 |Consultas 5, 9, 12, 13 | Sara Barreto  | feature/semana2_agregaciones | semana2__agregaciones.sql|
+|Actualización Changelog | Sara Barreto | feature/actualizar_changelog | CHANGELOG.md |
 
 
 ### Cambios principales
@@ -56,15 +49,17 @@
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
 | Consultas 7, 8, 10, 11 | Jerónimo Lievano | release/semana3_subconsultas | semana3_subconsultas.sql|
-| Creacion de vistas |Camilo Aguilar & Sara Barreto| | |
+| Creacion de vistas |Camilo Aguilar & Sara Barreto|feature/vistas | vistas.sql|
 | Consulta 15| Sara Barreto| release/semana3_subconsultas | semana3_subconsultas|
+|Actualización Changelog | Sara Barreto | feature/actualizar_changelog | CHANGELOG.md |
 
 ### Cambios principales
 - Creacion de vistas 
 - Continuación de consultas
 
 ### Problemas encontrados
-
+- No se tuvo los permisos suficientes para crear las vistas así que hizo el código de creación pero no se pudieron crear realmente. 
+- Dado el problema anterior, la consulta 15 fue hecha suponiendo que la vista 'V_OCUPACION_POR_ESTADIO' funcionaba correctamente. 
 
 ---
 
