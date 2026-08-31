@@ -45,3 +45,19 @@ SELECT fase,
        COUNT(*) AS cantidad_partidos
 FROM MORENOLUIS.FIFA_PARTIDO
 GROUP BY fase;
+
+
+ -- Vista 5
+-- ===============================================================================================
+-- Asistencia total y promedio por estadio 
+-- ===============================================================================================
+
+CREATE OR REPLACE VIEW V_OCUPACION_POR_ESTADIO AS
+SELECT E.ID_ESTADIO, E.NOMBRE ESTADIO, E.CIUDAD, E.CAPACIDAD, COUNT(P.ID_PARTIDO) TOTAL_PARTIDOS,
+SUM(P.ASISTENCIA_REGISTRADA) ASISTENCIA_TOTAL , ROUND(AVG(P.ASISTENCIA_REGISTRADA), 2) ASISTENCIA_PROMEDIO,
+ROUND(AVG(P.ASISTENCIA_REGISTRADA) / E.CAPACIDAD * 100, 2) PORCENTAJE_OCUPACION
+FROM MORENOLUIS.FIFA_ESTADIO E LEFT JOIN MORENOLUIS.FIFA_PARTIDO P
+    ON E.ID_ESTADIO = P.ID_ESTADIO 
+GROUP BY E.ID_ESTADIO, E.NOMBRE, E.CIUDAD, E.CAPACIDAD;
+
+ main
