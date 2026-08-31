@@ -10,7 +10,7 @@ group by fase
 order by num_partidos desc;
 
 -- ==============================================================================
--- CONSULTA 5
+-- CONSULTA 5 <Mayor cantidad de partidos según estadios y edicion>
 -- ==============================================================================
 SELECT *
 FROM MORENOLUIS.FIFA_ESTADIO; -- ID_ESTADIO, NOMBRE
@@ -41,7 +41,7 @@ WHERE E.ID_EDICION = B.ID_EDICION
 GROUP BY A.ID_ESTADIO);
 
 -- ===========================================================================
--- CONSULTA 9
+-- CONSULTA 9 <Partido con mayor marcador por estadio>
 -- ===========================================================================
 
 SELECT *
@@ -74,7 +74,7 @@ GROUP BY Z.ID_PARTIDO)
 ORDER BY NOMBRE; 
 
 -- ===========================================================================
--- CONSULTA 12
+-- CONSULTA 12 <Goles fase grupos v/s fase eliminatoria>
 -- ===========================================================================
 
 SELECT *
@@ -97,7 +97,7 @@ GROUP BY S.PAIS
 ORDER BY S.PAIS; 
 
 -- ==============================================================================
--- CONSULTA 13
+-- CONSULTA 13 <Estadios con mas de una fase distinta>
 -- ==============================================================================
 
 SELECT *
