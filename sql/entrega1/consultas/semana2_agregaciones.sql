@@ -1,3 +1,14 @@
+--semana2_agregaciones.sql
+
+-- ==============================================================================
+-- CONSULTA 4 <Partidos jugados por fase> 
+-- ==============================================================================
+
+select fase, count(id_partido) num_partidos
+from MORENOLUIS.FIFA_PARTIDO
+group by fase
+order by num_partidos desc;
+
 -- ==============================================================================
 -- CONSULTA 5
 -- ==============================================================================
@@ -104,4 +115,6 @@ FROM MORENOLUIS.FIFA_ESTADIO E JOIN MORENOLUIS.FIFA_PARTIDO P
 ON E.ID_ESTADIO = P.ID_ESTADIO
 GROUP BY E.NOMBRE, E.ID_ESTADIO
 HAVING COUNT(DISTINCT P.FASE) > 1;
+
+
 
