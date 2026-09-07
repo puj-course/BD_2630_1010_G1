@@ -156,3 +156,33 @@ CREATE TABLE PARTICIPACION_PARTIDO
        -- ON DELETE RESTRICT
     );
 
+-- ========================================================================
+-- INDICES
+-- ========================================================================
+
+CREATE INDEX indice_seleccion_edicion 
+ON SELECCION (id_edicion);
+
+-- JUSTIFICACIÓN: 
+-- Optimiza las consultas para listar los países participantes de un Mundial 
+-- específico y acelera las eliminaciones en cascada (ON DELETE CASCADE) de esa edición.
+
+CREATE INDEX indice_convocados_seleccion 
+ON CONVOCADOS_POR_EDICION (id_seleccion);
+
+-- JUSTIFICACIÓN: 
+-- Acelera la obtención del equipo completo de una selección. Como id_seleccion 
+-- no es la clave primaria de esta tabla, el índice evita escanear a todos los jugadores del torneo.
+CREATE INDEX idx_fk_partic_seleccion 
+ON PARTICIPACION_PARTIDO (id_seleccion);
+
+-- JUSTIFICACIÓN: 
+-- Facilita la consulta del historial y desempeño de un equipo (partidos jugados, 
+-- victorias o goles) sin tener que recorrer las participaciones de los demás países.
+
+CREATE INDEX idx_fk_partido_edicion 
+ON PARTIDO (id_edicion);
+
+-- JUSTIFICACIÓN: 
+-- Permite cargar todos los partidos de una edición puntual de forma directa 
+-- y hace eficiente la eliminación en cascada de los partidos si se borra el torneo.
