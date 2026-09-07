@@ -173,14 +173,14 @@ ON CONVOCADOS_POR_EDICION (id_seleccion);
 -- JUSTIFICACIÓN: 
 -- Acelera la obtención del equipo completo de una selección. Como id_seleccion 
 -- no es la clave primaria de esta tabla, el índice evita escanear a todos los jugadores del torneo.
-CREATE INDEX idx_fk_partic_seleccion 
+CREATE INDEX indice_partic_seleccion 
 ON PARTICIPACION_PARTIDO (id_seleccion);
 
 -- JUSTIFICACIÓN: 
 -- Facilita la consulta del historial y desempeño de un equipo (partidos jugados, 
 -- victorias o goles) sin tener que recorrer las participaciones de los demás países.
 
-CREATE INDEX idx_fk_partido_edicion 
+CREATE INDEX indice_partido_edicion 
 ON PARTIDO (id_edicion);
 
 -- JUSTIFICACIÓN: 
