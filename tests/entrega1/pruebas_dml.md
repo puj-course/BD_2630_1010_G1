@@ -1,91 +1,176 @@
-*intento de 3 operaciones invalidas* 
---1.
-INSERT INTO is101001.edicion_mundial (id_edicion, anio, pais_sede, lema, fecha_inicio, chafing)
+##### **Intento de 3 operaciones inválidas**
+
+
+
+###### **1. Inserción en 'edicion\_mundial'**
+
+
+
+```sql
+
+INSERT INTO is101001.edicion\_mundial (id\_edicion, anio, pais\_sede, lema, fecha\_inicio, fecha\_fin)
+
 VALUES (56, 1926, 'Colombia', 'Amor y paz', '11-JUN-1926','11-JUL-1926');
 
--- Se trata de insertar una tupla en edicion_mundiañ y no deja por la restriccion check min_anio_edicion 
--- porque la que se inserta es menor a 1930 que fue el primer mundial
+```
 
---2.
-INSERT INTO is101001.seleccion (id_seleccion, id_edicion, pais, confederacion, grupo, convocados)
+
+
+Error: No se permite porque la restricción CHECK min\_anio\_edicion exige que el año sea mayor o igual a 1930 (primer mundial).
+
+
+
+###### **2. Inserción en 'seleccion'**
+
+
+
+```sql
+
+INSERT INTO is101001.seleccion (id\_seleccion, id\_edicion, pais, confederacion, grupo, convocados)
+
 VALUES (90, null, 'RD Congo', 'AFC', 'H', 24);
 
--- Intento de insertar seleccion y aparece la restriccion de not null en edicion_mundial
+```
 
---3.
-INSERT INTO is101001.jugador (id_jugador, nombre, fecha_nacimiento, altura, peso, nacionalidad)
+
+
+Error: La columna id\_edicion tiene restricción NOT NULL. Al insertar null, la operación falla.
+
+
+
+###### **3. Inserción en jugador**
+
+
+
+```sql
+
+INSERT INTO is101001.jugador (id\_jugador, nombre, fecha\_nacimiento, altura, peso, nacionalidad)
+
 VALUES ('1001', 'Cristiano Ronaldo', '05-FEB-1985', 187, 83, 'Portugal');
 
--- Insercion fallida por Restriccion de primary key especificamente unique ya que el id ya fue insertado
+```
+
+Error: Violación de restricción PRIMARY KEY (único). El id\_jugador = 1001 ya existe.
 
 
-*Demostración del comportamiento ON DELETE en al menos 2 relaciones distintas.*
 
---Prueba eliminacion cascade de seleccion
-Este es el DDL
-CREATE TABLE SELECCION
-    (id_seleccion VARCHAR(20),
-    id_edicion VARCHAR(20) NOT NULL,
-    pais VARCHAR (50) NOT NULL, 
-    confederacion VARCHAR(15),
-    grupo CHAR(1),
-    convocados NUMERIC(2),
-    PRIMARY KEY (id_seleccion), 
-    
-    CONSTRAINT edicion_pais UNIQUE (id_edicion, pais),
-    
-    CONSTRAINT numero_convocados CHECK (convocados <= 26 AND convocados >=23),
-    
-    CONSTRAINT grupo_confederaciones CHECK (confederacion IN ('UEFA','CONMEBOL','CONCACAF','CAF','AFC','OFC')),
-    
-    -- JUSTIFICACION: 
-    -- ON DELETE: Se deja en CASCADE porque al borrar una edicion no tiene sentido conservar las
-    -- selecciones porque pierden su contexto (al dejar en null el id_edicion) así que es mejor borrarlas.
-    -- ON UPDATE: Se deja RESTRICT, ya que al ser id_edicion la FK pero también la PK (subrogada) de EDICION_MUNDIAL
-    -- esta debería ser inmutable. 
-    FOREIGN KEY (id_edicion) REFERENCES EDICION_MUNDIAL
-        ON DELETE CASCADE
-    );
-
-Antes de eliminar: 
-id   edicion_id   pais
-101	1	Argentina	CONMEBOL	C	26
-102	1	Francia		UEFA		D	26
-103	1	Croacia		UEFA		F	26
-104	1	Marruecos	CAF		F	26
-105	3	Belgica		UEFA		G	23
-106	3	Inglaterra	UEFA		G	23
-107	3	Brasil		CONMEBOL	E	23
-108	3	Japon		AFC		H	23
-
-sentencia: 
-delete from is101001.edicion_mundial
-where id_edicion = 1;
-
-Después de eliminar:
-
-105	3	Belgica		UEFA		G	23
-106	3	Inglaterra	UEFA		G	23
-107	3	Brasil		CONMEBOL	E	23
-108	3	Japon		AFC		H	23
+##### **Demostración del comportamiento ON DELETE**
 
 
---Prueba eliminacion on restriction en participacion partido
-DDL:
 
-FOREIGN KEY (id_seleccion) REFERENCES SELECCION
-       -- ON DELETE RESTRICT
-    );
+###### **1. Eliminación en cascada (CASCADE) en seleccion**
 
-sentencia
-delete from is101001.seleccion
-where id_seleccion = 101;
 
-mensaje de error:
-Error starting at line : 57 in command -
-delete from is101001.seleccion
-where id_seleccion = 101
-Error report -
-ORA-02292: integrity constraint (IS101001.SYS_C00925668) violated - child record found
+
+DDL de la relación selección
+
+```sql
+
+CREATE TABLE SELECCION (
+
+&#x20;   ...
+
+&#x09;
+
+&#x20;   FOREIGN KEY (id\_edicion) REFERENCES EDICION\_MUNDIAL
+
+&#x20;       ON DELETE CASCADE
+
+);
+
+```
+
+
+
+Al borrar una edición, se eliminan automáticamente las selecciones asociadas.
+
+
+
+Antes de eliminar:
+
+
+
+id	edicion\_id	pais		confederacion	grupo	convocados
+
+101	1		Argentina	CONMEBOL	C	26
+
+102	1		Francia		UEFA		D	26
+
+103	1		Croacia		UEFA		F	26
+
+104	1		Marruecos	CAF		F	26
+
+105	3		Belgica		UEFA		G	23
+
+106	3		Inglaterra	UEFA		G	23
+
+107	3		Brasil		CONMEBOL	E	23
+
+108	3		Japon		AFC		H	23
+
+
+
+Sentencia:
+
+```sql
+
+DELETE FROM is101001.edicion\_mundial
+
+WHERE id\_edicion = 1;
+
+```
+
+
+
+Despúes de eliminar:
+
+
+
+id	edicion\_id	pais		confederacion	grupo	convocados
+
+105	3		Belgica		UEFA		G	23
+
+106	3		Inglaterra	UEFA		G	23
+
+107	3		Brasil		CONMEBOL	E	23
+
+108	3		Japon		AFC		H	23
+
+
+
+###### **2. Eliminación con restricción (RESTRICT) en participacion\_partido**
+
+
+
+DDL de la relación participacion\_partido
+
+```sql
+
+FOREIGN KEY (id\\\_seleccion) REFERENCES SELECCION
+
+ON DELETE RESTRICT;
+
+```
+
+Sentencia:
+
+```sql
+
+DELETE FROM is101001.seleccion
+
+WHERE id\_seleccion = 101;
+
+```
+
+Resultado:
+
+```code
+
+ORA-02292: integrity constraint (IS101001.SYS\_C00925668) violated - child record found
+
+```
+
+No se puede eliminar la selección porque existen registros dependientes en participacion\_partido con on delete restrict.
+
 
 
