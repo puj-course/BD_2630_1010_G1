@@ -186,3 +186,4 @@ ON PARTIDO (id_edicion);
 -- JUSTIFICACIÓN: 
 -- Permite cargar todos los partidos de una edición puntual de forma directa 
 -- y hace eficiente la eliminación en cascada de los partidos si se borra el torneo.
+----jj
