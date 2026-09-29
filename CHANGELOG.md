@@ -50,7 +50,7 @@
 |------|------|------|------|
 | Consultas 7, 8, 10, 11 | Jerónimo Lievano | release/semana3_subconsultas | semana3_subconsultas.sql|
 | Creacion de vistas |Camilo Aguilar & Sara Barreto|feature/vistas | vistas.sql|
-| Consulta 15| Sara Barreto| release/semana3_subconsultas | semana3_subconsultas|
+| Consulta 15| Sara Barreto| release/semana3_subconsultas | semana3_subconsultas.sql|
 |Actualización Changelog | Sara Barreto | feature/actualizar_changelog | CHANGELOG.md |
 
 ### Cambios principales
@@ -102,21 +102,59 @@
 - Se revisó la configuración de permisos para asegurar que cada usuario pudiera realizar únicamente las operaciones correspondientes a su nivel de acceso.
 
 ---
-## Semana 4 (13–22 abril)
+## Semana 4 (6-12 septiembre)
 
 ### Objetivos de la semana
 
-(Describan qué querían lograr esta semana)
+- Hacer el álgebra relacional de 4 consultas ya implementadas.
+- Hacer revision de la estructura final del proyecto (entrega 1).
+- Identificar problemas del modelo inicial, proponer y hacer boceto de el siguiente modelo. 
+- Completar documento técnico.
+- Hacer diccionario de datos. 
+- Actualizar changelog.
 
 ### Tareas realizadas
 
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
-| | | | |
-| | | | |
-| | | | |
+| Álgebra relacional | Jerónimo Lievano | release/semana4_alegra_relacional| Se escribo a manera de algebra relacional 4 consultas ya elavoradas en SQL.|
+| Identificar problemáticas del modelo inicial | Camilo Aguilar| feature/elacuacion-critica-modelo | Se evaluaron las problemáticas principales del modelo inicial. |
+| Propuesta y boceto del modelo futuro | Camilo Aguilar | feature/elacuacion-critica-modelo | Se elaboro una propuesta y un boceto inicial para el próximo modelo (para la segunda entrega)|
+| Completación del documento técnico | Sara Barreto | feature/documento-tecnico |Se completó la parte final del documento técnico. |
+| Diccionario de datos. | Sara Barreto | feature/diccionario_datos| Se hizo el diccionario de datos del modelo incial.|
+| Actualización CHANGELOG | Sara Barreto | feature/actualizar_changelog | Se actualizó el changelog. |
 
 ### Cambios principales
 
+- Se completó el documento técnico. 
+- Se creó el diccionario de datos del modelo inicial. 
+- Se hizo la propuesta para el modelo de la segunda entrega. 
+- Se escribieron las 4 consultas en álgebra relacional. 
 
 ### Problemas encontrados
+--
+
+---
+## Semana 4 (6-12 septiembre)
+
+### Objetivos de la semana
+
+- Documento sobre el modelo lógico ampliado.
+- Crear el diagrama entidad-relación en base al nuevo modelo. 
+- Diccionario de datos ampliado.
+
+### Tareas realizadas
+
+| Tarea | Responsable(s) | Rama utilizada | Descripción |
+|------|------|------|------|
+| Creacion doc. modelo lógico. | Camilo Aguilar | feature/modelo-logico-entrega2 | Se creó el documento para el nuevo modelo.  |
+| Diagrama entidad-relacion | Jerónimo Lievano | feature/modelo-logico-entrega2 | Diagrama representativo nuevo modelo.|
+| Diccionario de datos ampliado | Sara Barreto | feature/diccionario_ampliado | Se elaboró el diccionario del nuevo modelo. |
+
+### Cambios principales
+- Se elaboró el docuemnto descriptivo del nuevo modelo lógico. 
+- Se hizo el diagrama en base al nuevo modelo.
+- Se elaboró el diccionario de datos del nuevo modelo. 
+
+### Problemas encontrados
+--
