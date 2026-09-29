@@ -67,39 +67,94 @@
 
 ### Objetivos de la semana
 
-(Describan qué querían lograr esta semana)
+- Implementar el DDL del modelo inicial con tablas, claves primarias, claves foráneas, restricciones e índices.
+- Actualizar las pruebas DML con operaciones inválidas y validaciones de comportamiento `ON DELETE`.
+- Implementar la Consulta 14 para verificar la integridad de las participaciones.
+- Configurar y documentar privilegios para usuarios de consulta y operativo.
+- Actualizar la evidencia de pruebas y el registro de cambios de la semana.
 
 ### Tareas realizadas
 
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
-| | | | |
-| | | | |
-| | | | |
+| Punto 1 — `sql/entrega1/ddl/ddl_modelo_inicial.sql` | IS101000 — Sara Barreto | [Agregar rama utilizada] | Definición de tablas, PK y FK con `ON DELETE` / `ON UPDATE` explícito y justificado; implementación de restricciones `CHECK` y `UNIQUE`; creación de índices estratégicos con su respectiva justificación. |
+| Punto 4.1 — Creación de usuarios/roles | IS101000 — Sara Barreto | [Agregar rama utilizada] | Creación de al menos dos usuarios/roles: uno de solo consulta y otro operativo. |
+| Punto 4.2 — `GRANT` / `REVOKE` | IS101000 — Sara Barreto | [Agregar rama utilizada] | Implementación de las sentencias `GRANT` y `REVOKE` correspondientes para controlar los privilegios asignados a los usuarios/roles. |
+| Punto 3 — `sql/entrega1/consultas/semana4_verificacion_integridad.sql` | IS101001 — Camilo Aguilar | `feature/consulta-14-integridad` | Implementación de la Consulta 14 para identificar participaciones duplicadas de una selección en un mismo partido y verificar la restricción anti-duplicidad. |
+| Punto 4.3 — `tests/entrega1/pruebas_privilegios.md` | IS101001 — Camilo Aguilar | `feature/pruebas-privilegios` | Documentación de las pruebas de privilegios realizadas sobre los usuarios de consulta y operativo, incluyendo operaciones permitidas, operaciones rechazadas y resultados obtenidos. |
+| Punto 5 — `CHANGELOG.md` | IS101001 — Camilo Aguilar | [Agregar rama utilizada] | Actualización del `CHANGELOG.md` con los objetivos, tareas realizadas, responsables, ramas utilizadas y problemas encontrados durante la Semana 3. |
+| Punto 2 — `sql/entrega1/dml/dml_ciclo_vida_partido.sql` | IS101008 — Jerónimo Lievano | [Agregar rama utilizada] | Implementación de al menos tres intentos de operación inválida y demostración del comportamiento `ON DELETE` en al menos dos relaciones distintas. |
+| Punto 2 — `tests/entrega1/pruebas_dml.md` | IS101008 — Jerónimo Lievano | [Agregar rama utilizada] | Documentación de cada caso inválido y de cada prueba de borrado, describiendo la operación ejecutada y el resultado obtenido. |
 
 ### Cambios principales
 
+- Se completó la definición inicial del modelo mediante DDL.
+- Se agregaron restricciones de integridad e índices estratégicos.
+- Se incorporaron pruebas DML para validar operaciones inválidas y relaciones con `ON DELETE`.
+- Se agregó la Consulta 14 de verificación de integridad.
+- Se documentaron los privilegios de los usuarios de consulta y operativo.
+- Se actualizaron las evidencias de pruebas correspondientes a la semana.
 
 ### Problemas encontrados
 
+- El usuario de consulta `IS101000` recibió correctamente privilegios de solo lectura. Las operaciones `INSERT`, `UPDATE` y `DELETE` fueron rechazadas con el error `ORA-01031: privilegios insuficientes`, tal como se esperaba.
+- Durante las pruebas del usuario operativo `IS101008` fue necesario verificar los privilegios antes y después de su asignación para comprobar el comportamiento esperado.
+- Se revisó la configuración de permisos para asegurar que cada usuario pudiera realizar únicamente las operaciones correspondientes a su nivel de acceso.
 
 ---
-
-## Semana 4 (13–22 abril)
+## Semana 4 (6-12 septiembre)
 
 ### Objetivos de la semana
 
-(Describan qué querían lograr esta semana)
+- Hacer el álgebra relacional de 4 consultas ya implementadas.
+- Hacer revision de la estructura final del proyecto (entrega 1).
+- Identificar problemas del modelo inicial, proponer y hacer boceto de el siguiente modelo. 
+- Completar documento técnico.
+- Hacer diccionario de datos. 
+- Actualizar changelog.
 
 ### Tareas realizadas
 
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
-| | | | |
-| | | | |
-| | | | |
+| Álgebra relacional | Jerónimo Lievano | release/semana4_alegra_relacional| Se escribo a manera de algebra relacional 4 consultas ya elavoradas en SQL.|
+| Identificar problemáticas del modelo inicial | Camilo Aguilar| feature/elacuacion-critica-modelo | Se evaluaron las problemáticas principales del modelo inicial. |
+| Propuesta y boceto del modelo futuro | Camilo Aguilar | feature/elacuacion-critica-modelo | Se elaboro una propuesta y un boceto inicial para el próximo modelo (para la segunda entrega)|
+| Completación del documento técnico | Sara Barreto | feature/documento-tecnico |Se completó la parte final del documento técnico. |
+| Diccionario de datos. | Sara Barreto | feature/diccionario_datos| Se hizo el diccionario de datos del modelo incial.|
+| Actualización CHANGELOG | Sara Barreto | feature/actualizar_changelog | Se actualizó el changelog. |
 
 ### Cambios principales
 
+- Se completó el documento técnico. 
+- Se creó el diccionario de datos del modelo inicial. 
+- Se hizo la propuesta para el modelo de la segunda entrega. 
+- Se escribieron las 4 consultas en álgebra relacional. 
 
 ### Problemas encontrados
+--
+
+---
+## Semana 4 (6-12 septiembre)
+
+### Objetivos de la semana
+
+- Documento sobre el modelo lógico ampliado.
+- Crear el diagrama entidad-relación en base al nuevo modelo. 
+- Diccionario de datos ampliado.
+
+### Tareas realizadas
+
+| Tarea | Responsable(s) | Rama utilizada | Descripción |
+|------|------|------|------|
+| Creacion doc. modelo lógico. | Camilo Aguilar | feature/modelo-logico-entrega2 | Se creó el documento para el nuevo modelo.  |
+| Diagrama entidad-relacion | Jerónimo Lievano | feature/modelo-logico-entrega2 | Diagrama representativo nuevo modelo.|
+| Diccionario de datos ampliado | Sara Barreto | feature/diccionario_ampliado | Se elaboró el diccionario del nuevo modelo. |
+
+### Cambios principales
+- Se elaboró el docuemnto descriptivo del nuevo modelo lógico. 
+- Se hizo el diagrama en base al nuevo modelo.
+- Se elaboró el diccionario de datos del nuevo modelo. 
+
+### Problemas encontrados
+--

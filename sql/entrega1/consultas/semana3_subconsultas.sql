@@ -97,3 +97,12 @@ SELECT d.pais, d.diferencia_gol
 FROM diferencia_por_seleccion d, promedio_global pg
 WHERE d.diferencia_gol > pg.promedio
 ORDER BY d.diferencia_gol DESC;
+
+-- ===================================================
+-- Consulta 15 <Estadios más llenos> 
+-- ===================================================
+
+SELECT ESTADIO, CIUDAD, CAPACIDAD, TOTAL_PARTIDOS, PORCENTAJE_OCUPACION
+FROM V_OCUPACION_POR_ESTADIO
+WHERE PORCENTAJE_OCUPACION > 80
+ORDER BY PORCENTAJE_OCUPACION DESC; 
