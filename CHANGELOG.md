@@ -135,7 +135,7 @@
 --
 
 ---
-## Semana 4 (6-12 septiembre)
+## Semana 5 (20-26 septiembre)
 
 ### Objetivos de la semana
 
@@ -158,3 +158,29 @@
 
 ### Problemas encontrados
 --
+
+
+---
+## Semana 6 (27-3 octubre)
+
+### Objetivos de la semana
+
+- Documento y diagrama sobre el modelo fisico ampliado.
+- Crear el ddl del nuevo modelo. 
+- Set de datos de prueba.
+
+### Tareas realizadas
+
+| Tarea | Responsable(s) | Rama utilizada | Descripción |
+|------|------|------|------|
+| Set de datos de prueba. | Camilo Aguilar | develop/semana2_ddl_modelo_ampliado | Se creó el data-set para el nuevo modelo.  |
+| Documento y diagrama sobre el modelo fisico ampliado | Jerónimo Lievano y Sara| develop/semana2_ddl_modelo_ampliado | modelo fisico documentacion.|
+| Crear el ddl del nuevo modelo | Sara Barreto y Jerónimo | develop/semana2_ddl_modelo_ampliado | Condiciones ON DELETE/UPDATE, índices y CHECK/UNIQUE.|
+
+### Cambios principales
+- Se elaboró el docuemnto descriptivo del nuevo modelo físico. 
+- Se hizo el diagrama en base al nuevo modelo.
+- Se elaboró el ddl del nuevo modelo.
+- Se creó el data set de pruebas.
+
+### Problemas encontrados
