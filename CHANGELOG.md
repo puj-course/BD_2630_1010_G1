@@ -1,186 +1,37 @@
-# CHANGELOG
-
-
-## Equipo del Proyecto
-| Nombre        | GitHub / Perfil |
-|--------------|-----------------|
-| Estudiante 1 | github.com/Daiana-07        |
-| Estudiante 2 | github.com/jlievanob-ops    |
-| Estudiante 3 | github.com/kmilo1147-glitch |
-
----
-
-## Semana 1 (24–30 agosto)
+## Semana 6 (28 septiembre - 4 octubre)
 
 ### Objetivos de la semana
 
-- Hacer Documento técnico. 
-- Hacer consultas 1, 2, 3, 4, 5, 6, 9, 12 y 13
-
-### Tareas realizadas
-
-| Tarea | Responsable(s) | Rama utilizada | Archivo(s) |
-|------|------|------|------|
-|Hacer documento técnico | Camilo Aguilar | feature/documento-tecnico|documento_tecnico.md |
-|Consultas 1 y 3 | Camilo Aguilar | feature/semana2_agregaciones | semana2_agregaciones.sql|
-|Consultas 2, 4 y 6 | Jerónimo Lievano | release/semana1_joins | semana1_joins.sql |
-|Diagrama ER | Jerónimo Lievano | feature/modelo_er_inicial | modelo_er_inicial.png |
-|Consultas 5, 9, 12, 13 | Sara Barreto  | feature/semana2_agregaciones | semana2__agregaciones.sql|
-|Actualización Changelog | Sara Barreto | feature/actualizar_changelog | CHANGELOG.md |
-
-
-### Cambios principales
-- Se reconoció visualmente las relaciones y las tablas por el ERD
-- Se hicieron y definieron 9 consultas 
-
-### Problemas encontrados
---
-
----
-
-## Semana 2 (24–30 agosto)
-
-### Objetivos de la semana
-
-(Describan qué querían lograr esta semana)
+- Crear el documento y diagrama del modelo físico ampliado.
+- Crear el DDL correspondiente al nuevo modelo.
+- Definir PK, FK, restricciones CHECK y UNIQUE e índices.
+- Crear un conjunto de datos de prueba coherente para todas las entidades del modelo ampliado.
+- Verificar la correcta ejecución del DDL y de la carga de datos.
 
 ### Tareas realizadas
 
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
-| Consultas 7, 8, 10, 11 | Jerónimo Lievano | release/semana3_subconsultas | semana3_subconsultas.sql|
-| Creacion de vistas |Camilo Aguilar & Sara Barreto|feature/vistas | vistas.sql|
-| Consulta 15| Sara Barreto| release/semana3_subconsultas | semana3_subconsultas.sql|
-|Actualización Changelog | Sara Barreto | feature/actualizar_changelog | CHANGELOG.md |
-
-### Cambios principales
-- Creacion de vistas 
-- Continuación de consultas
-
-### Problemas encontrados
-- No se tuvo los permisos suficientes para crear las vistas así que hizo el código de creación pero no se pudieron crear realmente. 
-- Dado el problema anterior, la consulta 15 fue hecha suponiendo que la vista 'V_OCUPACION_POR_ESTADIO' funcionaba correctamente. 
-
----
-
-## Semana 3 (6–12 abril)
-
-### Objetivos de la semana
-
-- Implementar el DDL del modelo inicial con tablas, claves primarias, claves foráneas, restricciones e índices.
-- Actualizar las pruebas DML con operaciones inválidas y validaciones de comportamiento `ON DELETE`.
-- Implementar la Consulta 14 para verificar la integridad de las participaciones.
-- Configurar y documentar privilegios para usuarios de consulta y operativo.
-- Actualizar la evidencia de pruebas y el registro de cambios de la semana.
-
-### Tareas realizadas
-
-| Tarea | Responsable(s) | Rama utilizada | Descripción |
-|------|------|------|------|
-| Punto 1 — `sql/entrega1/ddl/ddl_modelo_inicial.sql` | IS101000 — Sara Barreto | [Agregar rama utilizada] | Definición de tablas, PK y FK con `ON DELETE` / `ON UPDATE` explícito y justificado; implementación de restricciones `CHECK` y `UNIQUE`; creación de índices estratégicos con su respectiva justificación. |
-| Punto 4.1 — Creación de usuarios/roles | IS101000 — Sara Barreto | [Agregar rama utilizada] | Creación de al menos dos usuarios/roles: uno de solo consulta y otro operativo. |
-| Punto 4.2 — `GRANT` / `REVOKE` | IS101000 — Sara Barreto | [Agregar rama utilizada] | Implementación de las sentencias `GRANT` y `REVOKE` correspondientes para controlar los privilegios asignados a los usuarios/roles. |
-| Punto 3 — `sql/entrega1/consultas/semana4_verificacion_integridad.sql` | IS101001 — Camilo Aguilar | `feature/consulta-14-integridad` | Implementación de la Consulta 14 para identificar participaciones duplicadas de una selección en un mismo partido y verificar la restricción anti-duplicidad. |
-| Punto 4.3 — `tests/entrega1/pruebas_privilegios.md` | IS101001 — Camilo Aguilar | `feature/pruebas-privilegios` | Documentación de las pruebas de privilegios realizadas sobre los usuarios de consulta y operativo, incluyendo operaciones permitidas, operaciones rechazadas y resultados obtenidos. |
-| Punto 5 — `CHANGELOG.md` | IS101001 — Camilo Aguilar | [Agregar rama utilizada] | Actualización del `CHANGELOG.md` con los objetivos, tareas realizadas, responsables, ramas utilizadas y problemas encontrados durante la Semana 3. |
-| Punto 2 — `sql/entrega1/dml/dml_ciclo_vida_partido.sql` | IS101008 — Jerónimo Lievano | [Agregar rama utilizada] | Implementación de al menos tres intentos de operación inválida y demostración del comportamiento `ON DELETE` en al menos dos relaciones distintas. |
-| Punto 2 — `tests/entrega1/pruebas_dml.md` | IS101008 — Jerónimo Lievano | [Agregar rama utilizada] | Documentación de cada caso inválido y de cada prueba de borrado, describiendo la operación ejecutada y el resultado obtenido. |
+| Set de datos de prueba | Camilo Aguilar — Persona 3 (`kmilo1147-glitch`) | `develop/semana2_ddl_modelo_ampliado` | Se creó `carga_datos_prueba.sql` con datos coherentes para las 16 tablas del modelo ampliado. |
+| Documento y diagrama del modelo físico ampliado | Jerónimo Lievano — Persona 1 (`jlievanob-ops`) y Sara Daiana Barreto — Persona 2 (`Daiana-07`) | `develop/semana2_ddl_modelo_ampliado` | Se elaboró la documentación y el diagrama correspondiente al modelo físico ampliado. |
+| Creación del DDL del nuevo modelo | Jerónimo Lievano — Persona 1 (`jlievanob-ops`) y Sara Daiana Barreto — Persona 2 (`Daiana-07`) | `develop/semana2_ddl_modelo_ampliado` | Se implementaron las 16 tablas junto con PK, FK, restricciones CHECK y UNIQUE, índices y políticas ON DELETE. |
+| Revisión y pruebas del DDL | Camilo Aguilar — Persona 3 (`kmilo1147-glitch`) | `develop/semana2_ddl_modelo_ampliado` | Se revisó la compatibilidad del DDL con Oracle y se realizaron los ajustes necesarios antes de ejecutar la carga de datos. |
 
 ### Cambios principales
 
-- Se completó la definición inicial del modelo mediante DDL.
-- Se agregaron restricciones de integridad e índices estratégicos.
-- Se incorporaron pruebas DML para validar operaciones inválidas y relaciones con `ON DELETE`.
-- Se agregó la Consulta 14 de verificación de integridad.
-- Se documentaron los privilegios de los usuarios de consulta y operativo.
-- Se actualizaron las evidencias de pruebas correspondientes a la semana.
+- Se elaboró el documento y el diagrama del modelo físico ampliado.
+- Se implementó el DDL correspondiente a las 16 tablas del nuevo modelo.
+- Se definieron claves primarias, claves foráneas, restricciones `CHECK`, `UNIQUE` e índices.
+- Se corrigió la implementación de las relaciones con comportamiento `RESTRICT`, debido a que Oracle lo aplica por defecto cuando una clave foránea no contiene `ON DELETE CASCADE` ni `ON DELETE SET NULL`.
+- Se corrigió la restricción de `PARTICIPACION_PARTIDO` a `UNIQUE (id_partido, condicion)` para garantizar un único local y visitante por partido.
+- Se corrigió el tipo de dato de `ENTRADA.precio` de `NUMBER(2,10)` a `NUMBER(10,2)`.
+- Se creó el archivo `carga_datos_prueba.sql`.
+- Se insertaron 93 registros distribuidos entre las 16 tablas del modelo.
+- Se verificó correctamente la integridad de los datos y las relaciones entre partidos y selecciones.
 
 ### Problemas encontrados
 
-- El usuario de consulta `IS101000` recibió correctamente privilegios de solo lectura. Las operaciones `INSERT`, `UPDATE` y `DELETE` fueron rechazadas con el error `ORA-01031: privilegios insuficientes`, tal como se esperaba.
-- Durante las pruebas del usuario operativo `IS101008` fue necesario verificar los privilegios antes y después de su asignación para comprobar el comportamiento esperado.
-- Se revisó la configuración de permisos para asegurar que cada usuario pudiera realizar únicamente las operaciones correspondientes a su nivel de acceso.
-
----
-## Semana 4 (6-12 septiembre)
-
-### Objetivos de la semana
-
-- Hacer el álgebra relacional de 4 consultas ya implementadas.
-- Hacer revision de la estructura final del proyecto (entrega 1).
-- Identificar problemas del modelo inicial, proponer y hacer boceto de el siguiente modelo. 
-- Completar documento técnico.
-- Hacer diccionario de datos. 
-- Actualizar changelog.
-
-### Tareas realizadas
-
-| Tarea | Responsable(s) | Rama utilizada | Descripción |
-|------|------|------|------|
-| Álgebra relacional | Jerónimo Lievano | release/semana4_alegra_relacional| Se escribo a manera de algebra relacional 4 consultas ya elavoradas en SQL.|
-| Identificar problemáticas del modelo inicial | Camilo Aguilar| feature/elacuacion-critica-modelo | Se evaluaron las problemáticas principales del modelo inicial. |
-| Propuesta y boceto del modelo futuro | Camilo Aguilar | feature/elacuacion-critica-modelo | Se elaboro una propuesta y un boceto inicial para el próximo modelo (para la segunda entrega)|
-| Completación del documento técnico | Sara Barreto | feature/documento-tecnico |Se completó la parte final del documento técnico. |
-| Diccionario de datos. | Sara Barreto | feature/diccionario_datos| Se hizo el diccionario de datos del modelo incial.|
-| Actualización CHANGELOG | Sara Barreto | feature/actualizar_changelog | Se actualizó el changelog. |
-
-### Cambios principales
-
-- Se completó el documento técnico. 
-- Se creó el diccionario de datos del modelo inicial. 
-- Se hizo la propuesta para el modelo de la segunda entrega. 
-- Se escribieron las 4 consultas en álgebra relacional. 
-
-### Problemas encontrados
---
-
----
-## Semana 5 (20-26 septiembre)
-
-### Objetivos de la semana
-
-- Documento sobre el modelo lógico ampliado.
-- Crear el diagrama entidad-relación en base al nuevo modelo. 
-- Diccionario de datos ampliado.
-
-### Tareas realizadas
-
-| Tarea | Responsable(s) | Rama utilizada | Descripción |
-|------|------|------|------|
-| Creacion doc. modelo lógico. | Camilo Aguilar | feature/modelo-logico-entrega2 | Se creó el documento para el nuevo modelo.  |
-| Diagrama entidad-relacion | Jerónimo Lievano | feature/modelo-logico-entrega2 | Diagrama representativo nuevo modelo.|
-| Diccionario de datos ampliado | Sara Barreto | feature/diccionario_ampliado | Se elaboró el diccionario del nuevo modelo. |
-
-### Cambios principales
-- Se elaboró el docuemnto descriptivo del nuevo modelo lógico. 
-- Se hizo el diagrama en base al nuevo modelo.
-- Se elaboró el diccionario de datos del nuevo modelo. 
-
-### Problemas encontrados
---
-
-
----
-## Semana 6 (27-3 octubre)
-
-### Objetivos de la semana
-
-- Documento y diagrama sobre el modelo fisico ampliado.
-- Crear el ddl del nuevo modelo. 
-- Set de datos de prueba.
-
-### Tareas realizadas
-
-| Tarea | Responsable(s) | Rama utilizada | Descripción |
-|------|------|------|------|
-| Set de datos de prueba. | Camilo Aguilar | develop/semana2_ddl_modelo_ampliado | Se creó el data-set para el nuevo modelo.  |
-| Documento y diagrama sobre el modelo fisico ampliado | Jerónimo Lievano y Sara| develop/semana2_ddl_modelo_ampliado | modelo fisico documentacion.|
-| Crear el ddl del nuevo modelo | Sara Barreto y Jerónimo | develop/semana2_ddl_modelo_ampliado | Condiciones ON DELETE/UPDATE, índices y CHECK/UNIQUE.|
-
-### Cambios principales
-- Se elaboró el docuemnto descriptivo del nuevo modelo físico. 
-- Se hizo el diagrama en base al nuevo modelo.
-- Se elaboró el ddl del nuevo modelo.
-- Se creó el data set de pruebas.
-
-### Problemas encontrados
+- Oracle no admite la sintaxis explícita `ON DELETE RESTRICT`. Se corrigió el DDL eliminando dicha cláusula, manteniendo el mismo comportamiento restrictivo mediante la clave foránea.
+- Se detectó que la restricción `UNIQUE (condicion, id_seleccion)` impedía que una selección pudiera volver a participar con la misma condición en otros partidos. Se cambió por `UNIQUE (id_partido, condicion)`.
+- Se detectó que `NUMBER(2,10)` no era adecuado para almacenar el precio de las entradas, por lo que se cambió a `NUMBER(10,2)`.
+- Después de realizar los ajustes, el DDL y la carga de datos de prueba se ejecutaron correctamente sin errores.
