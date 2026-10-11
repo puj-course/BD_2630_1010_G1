@@ -3,7 +3,7 @@
 ## Introducción
 Justificar las tres formas normales de nuestro modelo de Gestión de la FIFA. Se evaluará el modelo completo. 
 
-![Modelo físico](https://raw.githubusercontent.com/Daiana-07/puj-course/BD_2630_1010_G1/blob/main/docs/entrega2/modelo_fisico.pdf)
+![Modelo físico](./modelo_fisico.pdf)
 
 ---
 
