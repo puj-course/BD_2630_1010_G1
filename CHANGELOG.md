@@ -194,5 +194,27 @@
 - Se detectó que `NUMBER(2,10)` no era adecuado para almacenar el precio de las entradas, por lo que se cambió a `NUMBER(10,2)`.
 - Después de realizar los ajustes, el DDL y la carga de datos de prueba se ejecutaron correctamente sin errores.
 
+## Semana 7 (5 octubre - 11 octubre)
 
+### Objetivos de la semana
+
+- Hacer la Justificación de 1FN, 2FN y 3FN para las tablas del modelo.
+- Crear 3 consultas orientadas a análisis deportivo y operativo del Mundial.
+
+### Tareas realizadas
+
+| Tarea | Responsable(s) | Rama utilizada | Descripción |
+|------|------|------|------|
+| Justificación de 1FN, 2FN y 3FN | Camilo Aguilar — Sara (`kmilo1147-glitch`) - (`Daiana-07`)| `feature/normalizacion` | Se creó `normalizacion.md` |
+| 3 consultas orientadas a análisis deportivo y operativo del Mundial. | Jerónimo Lievano (`jlievanob-ops`) | `feat/semana3_consultas_avanzadas` | Se hicieron tres consultas usando agregaciones y subconsultas en distintos niveles del toreno. |
+
+
+### Cambios principales
+
+- Se elaboró el documento normalización.md con las justificaciones de la implemntación de las formas normales.
+- Se crearon 3 consultas avanzadas usando agregaciones, agrupamientos y subconsultas concentradas en el análisis deportivo y operativo del mundial.
+
+### Problemas encontrados
+
+- Enlazar la imágen del modelo lógico en el documento normalizacion.md. Al final si se pudo.
 
