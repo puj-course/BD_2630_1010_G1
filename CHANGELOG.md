@@ -206,7 +206,7 @@
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
 | Justificación de 1FN, 2FN y 3FN | Camilo Aguilar — Sara (`kmilo1147-glitch`) - (`Daiana-07`)| `feature/normalizacion` | Se creó `normalizacion.md` |
-| 3 consultas orientadas a análisis deportivo y operativo del Mundial. | Jerónimo Lievano (`jlievanob-ops`) | `feat/semana3_consultas_avanzadas` | Se hicieron tres consultas usando agregaciones y subconsultas en distintos niveles del torneo, archivo `subconsultas_avanzadas_parte1`. |
+| 3 consultas orientadas a análisis deportivo y operativo del Mundial. | Jerónimo Lievano (`jlievanob-ops`) | `feat/semana3_consultas_avanzadas` | Se hicieron tres consultas usando agregaciones y subconsultas en distintos niveles del torneo, archivo `subconsultas_avanzadas_parte1.sql`. |
 
 
 ### Cambios principales
