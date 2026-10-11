@@ -206,12 +206,12 @@
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
 | Justificación de 1FN, 2FN y 3FN | Camilo Aguilar — Sara (`kmilo1147-glitch`) - (`Daiana-07`)| `feature/normalizacion` | Se creó `normalizacion.md` |
-| 3 consultas orientadas a análisis deportivo y operativo del Mundial. | Jerónimo Lievano (`jlievanob-ops`) | `feat/semana3_consultas_avanzadas` | Se hicieron tres consultas usando agregaciones y subconsultas en distintos niveles del toreno. |
+| 3 consultas orientadas a análisis deportivo y operativo del Mundial. | Jerónimo Lievano (`jlievanob-ops`) | `feat/semana3_consultas_avanzadas` | Se hicieron tres consultas usando agregaciones y subconsultas en distintos niveles del torneo, arhico `subconsultas_avanzadas_parte1`. |
 
 
 ### Cambios principales
 
-- Se elaboró el documento normalización.md con las justificaciones de la implemntación de las formas normales.
+- Se elaboró el documento normalización.md con las justificaciones de la implementación de las formas normales.
 - Se crearon 3 consultas avanzadas usando agregaciones, agrupamientos y subconsultas concentradas en el análisis deportivo y operativo del mundial.
 
 ### Problemas encontrados
