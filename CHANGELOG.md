@@ -156,6 +156,7 @@
 - Se hizo el diagrama en base al nuevo modelo.
 - Se elaboró el diccionario de datos del nuevo modelo. 
 
+---
 ## Semana 6 (28 septiembre - 4 octubre)
 
 ### Objetivos de la semana
@@ -194,6 +195,7 @@
 - Se detectó que `NUMBER(2,10)` no era adecuado para almacenar el precio de las entradas, por lo que se cambió a `NUMBER(10,2)`.
 - Después de realizar los ajustes, el DDL y la carga de datos de prueba se ejecutaron correctamente sin errores.
 
+---
 ## Semana 7 (5 octubre - 11 octubre)
 
 ### Objetivos de la semana
@@ -217,4 +219,23 @@
 ### Problemas encontrados
 
 - Enlazar la imágen del modelo lógico en el documento normalizacion.md. Al final si se pudo.
+---
+## Semana 8 (12 octubre - 18 octubre)
 
+### Objetivos de la semana
+- Completar archivos de consultas 
+- Documentar los roles Admin. torneo, Analísta Deportivo y Auditor. 
+- Crear roles en sql 
+- Casos de prueba exitosos y fallidos. 
+
+| Tarea | Responsable(s) | Rama utilizada | Descripción |
+|------|------|------|------|
+| Completar Archivos consultas | Jerónimo Lievano (`jlievanob-ops`)|||
+|Documentar Roles | Sara Barreto (`Daiana-07`)|feature/roles_privilegios| Se documentaron los roles de Administrador torneo, Analísta deportivo y Auditor especificando sus trabajos y qué permisos iban a tener con su respectiva justificación|
+| Creal roles SQL | Sara Barreto (`Daiana-07`)|feature/roles_privilegios| Se hicieron las sentencias de los roles en SQL|
+||||| 
+
+### Cambios principales
+- Creacion documento `roles_privilegios.md` para la documentación de los roles. 
+- Creacion del documento `roles_privilegios.sql` para la creacion de los roles dentro de la base de datos.  
+### Problemas encontrados
