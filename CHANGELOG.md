@@ -230,7 +230,7 @@
 
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
-| Completar Archivos consultas | Jerónimo Lievano (`jlievanob-ops`)|||
+| Completar Archivos consultas | Jerónimo Lievano (`jlievanob-ops`)| feat/semana3_consultas_avanzadas | Se completaron las consultas, arbitro más tarjetero, partido con más entradas vendidas y selecciones con goles mayor al promedio|
 |Documentar Roles | Sara Barreto (`Daiana-07`)|feature/roles_privilegios| Se documentaron los roles de Administrador torneo, Analísta deportivo y Auditor especificando sus trabajos y qué permisos iban a tener con su respectiva justificación|
 | Creal roles SQL | Sara Barreto (`Daiana-07`)|feature/roles_privilegios| Se hicieron las sentencias de los roles en SQL|
 |Hacer casos de prueba sobre privilegios| Sara Barreto (`Daiana-07`)|feature/roles_privilegios|Se hicieron las respectivas pruebas en base a los privilegios creados, y su respectiva documentación.| 
@@ -239,5 +239,6 @@
 - Creacion documento `roles_privilegios.md` para la documentación de los roles. 
 - Creacion del documento `roles_privilegios.sql` para la creacion de los roles dentro de la base de datos.  
 - Creacion carpeta `entrega2` en `tests` y el archivo `casos_prueba.md` para la documentacion de los casos de prueba.
+- Creacion del documento `consultas_avanzadas_parte2.sql`.
 
 ### Problemas encontrados
