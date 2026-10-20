@@ -15,6 +15,9 @@ ALTER TABLE EDICION_MUNDIAL
 ALTER TABLE EDICION_MUNDIAL 
     ADD CONSTRAINT anio UNIQUE ( anio ) ;
 
+ALTER TABLE EDICION_MUNDIAL
+    ADD CONSTRAINT rango_anios CHECK (anio >= 1930 AND anio != 1942 AND anio != 1946); 
+
 CREATE TABLE Estadio ( 
      id_estadio INTEGER  NOT NULL , 
      id_ciudad  INTEGER  NOT NULL , 
@@ -42,6 +45,9 @@ CREATE TABLE ACREDITACION_PRENSA (
 
 ALTER TABLE ACREDITACION_PRENSA 
     ADD CONSTRAINT ACREDITACION_PRENSA_PK PRIMARY KEY ( id_acreditacion ) ;
+
+ALTER TABLE ACREDITACION_PRENSA
+    ADD CONSTRAINT edicion_persona_prensa UNIQUE(id_edicion, id_persona);
 
 CREATE TABLE ASIGNACION_ARBITRAL ( 
      id_asignacion INTEGER  NOT NULL , 
@@ -181,6 +187,8 @@ CREATE TABLE PARTIDO(
      resultado_origen_1    VARCHAR2 (20 CHAR) , 
      resultado_origen_2    VARCHAR2 (20 CHAR),
     
+    CONSTRAINT valor_origen1 CHECK (resultado_origen_1 IN ('GANADOR','PERDEDOR')),
+    CONSTRAINT valor_origen2 CHECK (resultado_origen_2 IN ('GANADOR','PERDEDOR')),
     CONSTRAINT partido_asistencia CHECK (asistencia_registrada >= 0)
     );
 
