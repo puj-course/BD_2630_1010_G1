@@ -167,14 +167,16 @@
 | `id_seleccion` | `VARCHAR(20) ` | No | FK | - | Ninguna | Identificador de la selección. |
 | `condicion` | `VARCHAR2(10)` | No | - | - | CHECK (condicion IN ('LOCAL', 'VISITANTE')) | Condición de participación en el encuentro. |
 | `goles` | `NUMBER` | No | - | 0 | CHECK (goles >= 0) | Goles marcados por la selección en el partido. |
+| `goles_penales` | `NUMBER` | No | - | 0 |CHECK (goles_penales >= 0) |Goles penales marcados en el partido |
+| `resultado` | `VARCHAR(10)` | Si | - |- | CHECK(resultado IN ('GANO','PERDIO','EMPATO'))|Resultado final del partido |
 
 #### Relaciones (Foreign Keys)
 * `id_partido` $\rightarrow$ Referencia a `PARTIDO(id_partido)` | Regla: `ON DELETE CASCADE`, `ON UPDATE RESTRICT`.
 * `id_seleccion` $\rightarrow$ Referencia a `SELECCION(id_seleccion)` | Regla: `ON DELETE CASCADE`, `ON UPDATE RESTRICT`.
 
 #### Restricciones de Tabla (Compuestas o Checks globales)
-* **partido_seleccion_uk:** `UNIQUE (id_partido, id_seleccion)`
-* **partido_condicion_uk:** `UNIQUE (id_partido, condicion)`
+* **partido_seleccion:** `UNIQUE (id_partido, id_seleccion)`
+* **partido_condicion:** `UNIQUE (id_partido, condicion)`
 
 ---
 
@@ -209,7 +211,7 @@
 * `id_seleccion` $\rightarrow$ Referencia a `SELECCION(id_seleccion)` | Regla: `ON DELETE CASCADE`, `ON UPDATE RESTRICT`.
 
 #### Restricciones de Tabla (Compuestas o Checks globales)
-* **persona_seleccion_uk:** `UNIQUE (id_persona, id_seleccion)`
+* **persona_seleccion:** `UNIQUE (id_persona, id_seleccion)`
 
 ---
 
@@ -228,7 +230,8 @@
 * `id_persona` $\rightarrow$ Referencia a `PERSONA(id_persona)` | Regla: `ON DELETE CASCADE`, `ON UPDATE RESTRICT`.
 
 #### Restricciones de Tabla (Compuestas o Checks globales)
-* **partido_persona_arb_uk:** `UNIQUE (id_partido, id_persona)`
+* **partido_persona_arb:** `UNIQUE (id_partido, id_persona)`
+* **rolarb_partido:** `UNIQUE (id_partido, rol_arbitral)`
 
 ---
 
@@ -288,11 +291,11 @@
 * `id_persona` $\rightarrow$ Referencia a `PERSONA(id_persona)` | Regla: `ON DELETE CASCADE`, `ON UPDATE RESTRICT`.
 
 #### Restricciones de Tabla (Compuestas o Checks globales)
-* **edicion_persona_prensa_uk:** `UNIQUE (id_edicion, id_persona)`
+* **edicion_persona_prensa:** `UNIQUE (id_edicion, id_persona)`
 
 ---
 
-### 2.16. Tabla: `AUDITORIA_EVENTO`
+### 2.16. Tabla: `AUDITORIA`
 * **Descripción:** Almacena la trazabilidad de los cambios realizados sobre información crítica del sistema.
 
 | Campo | Tipo de Dato | Nulo | Clave | Default | Restricciones / Reglas | Descripción |
