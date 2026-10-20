@@ -2,29 +2,22 @@
 -- consultas_avanzadas_parte1.sql
 -- ================================
 
---Top 3 goleadores por edicion mundial
-
-SELECT id_edicion, mundial, nombre_completo, pais, posicion, goles
-FROM (
-    SELECT t.*,
-           ROW_NUMBER() OVER (PARTITION BY t.id_edicion ORDER BY t.goles DESC) rn
-    FROM (
-        SELECT em.id_edicion, em.nombre mundial, pers.nombre_completo, s.codigo_fifa pais, vs.posicion, COUNT(*) goles
-        FROM edicion_mundial em
-        JOIN etapa_competencia ec ON ec.id_edicion = em.id_edicion
-        JOIN partido p ON p.id_etapa = ec.id_etapa
-        JOIN evento_partido ep ON ep.id_partido = p.id_partido
-        JOIN persona pers ON pers.id_persona = ep.id_persona
-        JOIN vinculacion_seleccion vs ON vs.id_persona = pers.id_persona
-        JOIN seleccion s ON s.id_seleccion = vs.id_seleccion
-        JOIN etapa_competencia eg ON eg.id_etapa = s.id_etapa_grupo AND eg.id_edicion = em.id_edicion
-        WHERE ep.tipo_evento = 'GOL'
-        GROUP BY em.id_edicion, em.nombre, pers.nombre_completo,
-                 s.codigo_fifa, vs.posicion
-    ) t
-)
-WHERE rn <= 3
-ORDER BY id_edicion, rn;
+--Maximo goleador en la historia de los mundiales
+select *
+from (
+select p.id_persona, p.nombre_completo, count(ep.id_persona) goles
+from etapa_competencia ec  
+join partido p on p.id_etapa = ec.id_etapa 
+join evento_partido ep on ep.id_partido = p.id_partido
+join persona p on p.id_persona = ep.id_persona
+where ep.tipo_evento = 'GOL'
+group by p.id_persona, p.nombre_completo
+having count(ep.id_persona) = (select max(goles) from (select count(ep1.id_persona) goles
+                                                      from evento_partido ep1
+                                                      where ep1.tipo_evento = 'GOL'
+                                                      group by ep1.id_persona))
+order by goles desc)
+where rownum <= 1;
 
 -- Estadio con más partidos albergados en la fase de grupos por edicion
 
@@ -49,10 +42,12 @@ WHERE efg.partidos_albergados = (
 ORDER BY em.nombre;
 
 -- Federaciones que no hayan ganado ningun partido en alguna edicion
-SELECT DISTINCT of1.id_organizacion, of1.nombre, of1.pais, ec.id_edicion
+SELECT of1.id_organizacion, of1.nombre, of1.pais, ec.id_edicion, 
+    sum(case when pp.resultado = 'PERDIO' then 1 else 0 end) perdidos, sum(case when pp.resultado = 'GANO' then 1 else 0 end) ganados
 FROM organizaciones_futbol of1
 JOIN seleccion s ON s.id_organizacion = of1.id_organizacion
 JOIN etapa_competencia ec ON ec.id_etapa = s.id_etapa_grupo
+join participacion_partido pp on s.id_seleccion = pp.id_seleccion 
 WHERE NOT EXISTS (
     SELECT 1
     FROM seleccion s1
@@ -62,6 +57,6 @@ WHERE NOT EXISTS (
       AND ec1.id_edicion = ec.id_edicion
       AND pp.resultado = 'GANO'
 )
+group by of1.id_organizacion, of1.nombre, of1.pais, ec.id_edicion
 ORDER BY of1.nombre, ec.id_edicion;
 
-    
