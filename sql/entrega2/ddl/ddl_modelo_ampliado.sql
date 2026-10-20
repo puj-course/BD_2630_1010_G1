@@ -100,7 +100,7 @@ CREATE TABLE ENTRADA (
      id_partido INTEGER  NOT NULL , 
      categoria  VARCHAR2 (30 CHAR)  NOT NULL , 
      zona       VARCHAR2 (50 CHAR)  NOT NULL , 
-     precio     NUMBER (2,10)  NOT NULL , 
+     precio     NUMBER (10,2)  NOT NULL , 
      estado     VARCHAR2 (20)  NOT NULL,
 
      CONSTRAINT entrada_precio CHECK (precio >= 0)
@@ -173,7 +173,7 @@ ALTER TABLE PARTICIPACION_PARTIDO
     ADD CONSTRAINT Unique_Key_1v2 UNIQUE ( id_seleccion , id_partido ) ;
 
 ALTER TABLE PARTICIPACION_PARTIDO 
-    ADD CONSTRAINT Unique_Key_2v2 UNIQUE ( condicion , id_seleccion ) ;
+    ADD CONSTRAINT Unique_Key_2v2 UNIQUE ( id_partido , condicion ) ;
 
 CREATE TABLE PARTIDO( 
      id_partido            INTEGER  NOT NULL , 
@@ -252,7 +252,6 @@ ALTER TABLE ACREDITACION_PRENSA
     REFERENCES EDICION_MUNDIAL 
     (id_edicion) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT 
     /*
     ON DELETE RESTRICT: Permite evitar eliminar una edicion si ya tiene historial de 
@@ -268,7 +267,6 @@ ALTER TABLE SELECCION
     REFERENCES ETAPA_COMPETENCIA 
     (id_etapa) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: Proteje la integridad del dataset, haciendo que no se puedan 
@@ -283,7 +281,6 @@ ALTER TABLE PARTIDO
     REFERENCES Estadio 
     (id_estadio) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT 
 
     /*
@@ -299,7 +296,6 @@ ALTER TABLE PARTIDO
     REFERENCES ETAPA_COMPETENCIA 
     (id_etapa) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
 
     /*
@@ -315,7 +311,6 @@ ALTER TABLE VINCULACION_SELECCION
     REFERENCES PERSONA 
     (id_persona) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
 
     /*
@@ -331,7 +326,6 @@ ALTER TABLE ETAPA_COMPETENCIA
     REFERENCES EDICION_MUNDIAL 
     (id_edicion)
 
-    ON DELETE RESTRICT
     --ON UPDATE RESTRICT 
 
     /*
@@ -347,7 +341,6 @@ ALTER TABLE Estadio
     REFERENCES CIUDAD 
     (id_ciudad) 
     
-    ON DELETE RESTRICT 
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: No se puede eliminar una ciudad si tiene estadios construidos o registrados en ella.
@@ -361,7 +354,6 @@ ALTER TABLE ASIGNACION_ARBITRAL
     REFERENCES PERSONA 
     (id_persona) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: Protege la historia arbitral impidiendo borrar una persona si tiene asignaciones arbitrales.
@@ -419,7 +411,6 @@ ALTER TABLE CIUDAD
     REFERENCES SEDE 
     (id_sede) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: No se puede eliminar una sede si contiene ciudades registradas en la organización.
@@ -447,7 +438,6 @@ ALTER TABLE ACREDITACION_PRENSA
     REFERENCES PERSONA 
     (id_persona) 
 
-     ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: Preserva el registro histórico de los periodistas y su acreditación, impidiendo la eliminación de la persona.
@@ -461,7 +451,6 @@ ALTER TABLE PARTICIPACION_PARTIDO
     REFERENCES SELECCION 
     (id_seleccion) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: Impide eliminar una selección si cuenta con historial de participaciones registradas en partidos del torneo.
@@ -475,7 +464,6 @@ ALTER TABLE EVENTO_PARTIDO
     REFERENCES PERSONA 
     (id_persona) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: Garantiza el historial de los protagonistas principales evitando que la persona sea borrada si está en los eventos del partido.
@@ -503,7 +491,6 @@ ALTER TABLE SELECCION
     REFERENCES ORGANIZACIONES_FUTBOL 
     (id_organizacion) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: No permiten borrar organizaciones que tengan asociadas a selecciones. 
@@ -545,7 +532,6 @@ ALTER TABLE SEDE
     REFERENCES EDICION_MUNDIAL 
     (id_edicion) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: No se permite eliminar una edición mundial si tiene sedes asignadas.
@@ -588,7 +574,6 @@ ALTER TABLE VINCULACION_SELECCION
     REFERENCES SELECCION 
     (id_seleccion) 
 
-    ON DELETE RESTRICT
     -- ON UPDATE RESTRICT
     /*
     ON DELETE RESTRICT: No se puede eliminar una selección si mantiene a personas vinculadas.
