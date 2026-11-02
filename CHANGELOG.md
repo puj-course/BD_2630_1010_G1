@@ -241,3 +241,22 @@
 - Creacion carpeta `entrega2` en `tests` y el archivo `casos_prueba.md` para la documentacion de los casos de prueba.
 
 ### Problemas encontrados
+
+---
+
+## Semana 13 (25 octubre - 1 noviembre)
+
+### Objetivos de la semana
+- Hacer las 3 funciones 
+- Hacer los 3 procedimientos
+- Hacer 4 triggers
+- Documentación 
+- Evidencia triggers 
+
+| Tarea | Responsable(s) | Rama utilizada | Descripción |
+|------|------|------|------|
+| Funciones | Jeronimo Lievano | `` | |
+| Procedimientos | Sara Barreto y Jeronimo Lievano | `` | |
+| Triggers | Sara Barreto | `feature/triggers` | |
+| Evidencia Triggers | Sara Barreto | `feature/triggers` | |
+| Documentacion | Jeronimo Lievano, Sara Barreto | `` | |
