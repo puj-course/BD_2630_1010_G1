@@ -137,46 +137,46 @@ DECLARE
 BEGIN
     IF INSERTING THEN
         v_operacion := 'INSERT';
-        v_id_registro := :NEW.id_evento;
-        v_nuevo := 'id_evento: ' || :NEW.id_evento || 
-                   ', id_partido: ' || :NEW.id_partido || 
-                   ', id_persona: ' || :NEW.id_persona || 
-                   ', id_persona_relacionada: ' || :NEW.id_persona_relacionada || 
-                   ', tipo_evento: ' || :NEW.tipo_evento || 
-                   ', minuto: ' || :NEW.minuto || 
-                   ', valor_numerico: ' || :NEW.valor_numerico || 
-                   ', descripcion: ' || :NEW.descripcion;
+        v_id_registro := :new.id_evento;
+        v_nuevo := 'id_evento: ' || :new.id_evento || 
+                   ', id_partido: ' || :new.id_partido || 
+                   ', id_persona: ' || :new.id_persona || 
+                   ', id_persona_relacionada: ' || :new.id_persona_relacionada || 
+                   ', tipo_evento: ' || :new.tipo_evento || 
+                   ', minuto: ' || :new.minuto || 
+                   ', valor_numerico: ' || :new.valor_numerico || 
+                   ', descripcion: ' || :new.descripcion;
     ELSIF UPDATING THEN
         v_operacion := 'UPDATE';
-        v_id_registro := :NEW.id_evento;
-        v_viejo := 'id_evento: ' || :OLD.id_evento || 
-                   ', id_partido: ' || :OLD.id_partido || 
-                   ', id_persona: ' || :OLD.id_persona || 
-                   ', id_persona_relacionada: ' || :OLD.id_persona_relacionada || 
-                   ', tipo_evento: ' || :OLD.tipo_evento || 
-                   ', minuto: ' || :OLD.minuto || 
-                   ', valor_numerico: ' || :OLD.valor_numerico || 
-                   ', descripcion: ' || :OLD.descripcion;
+        v_id_registro := :new.id_evento;
+        v_viejo := 'id_evento: ' || :old.id_evento || 
+                   ', id_partido: ' || :old.id_partido || 
+                   ', id_persona: ' || :old.id_persona || 
+                   ', id_persona_relacionada: ' || :old.id_persona_relacionada || 
+                   ', tipo_evento: ' || :old.tipo_evento || 
+                   ', minuto: ' || :old.minuto || 
+                   ', valor_numerico: ' || :old.valor_numerico || 
+                   ', descripcion: ' || :old.descripcion;
                    
-        v_nuevo := 'id_evento: ' || :NEW.id_evento || 
-                   ', id_partido: ' || :NEW.id_partido || 
-                   ', id_persona: ' || :NEW.id_persona || 
-                   ', id_persona_relacionada: ' || :NEW.id_persona_relacionada || 
-                   ', tipo_evento: ' || :NEW.tipo_evento || 
-                   ', minuto: ' || :NEW.minuto || 
-                   ', valor_numerico: ' || :NEW.valor_numerico || 
-                   ', descripcion: ' || :NEW.descripcion;
+        v_nuevo := 'id_evento: ' || :new.id_evento || 
+                   ', id_partido: ' || :new.id_partido || 
+                   ', id_persona: ' || :new.id_persona || 
+                   ', id_persona_relacionada: ' || :new.id_persona_relacionada || 
+                   ', tipo_evento: ' || :new.tipo_evento || 
+                   ', minuto: ' || :new.minuto || 
+                   ', valor_numerico: ' || :new.valor_numerico || 
+                   ', descripcion: ' || :new.descripcion;
     ELSIF DELETING THEN
         v_operacion := 'DELETE';
-        v_id_registro := :OLD.id_evento;
-        v_viejo := 'id_evento: ' || :OLD.id_evento || 
-                   ', id_partido: ' || :OLD.id_partido || 
-                   ', id_persona: ' || :OLD.id_persona || 
-                   ', id_persona_relacionada: ' || :OLD.id_persona_relacionada || 
-                   ', tipo_evento: ' || :OLD.tipo_evento || 
-                   ', minuto: ' || :OLD.minuto || 
-                   ', valor_numerico: ' || :OLD.valor_numerico || 
-                   ', descripcion: ' || :OLD.descripcion;
+        v_id_registro := :old.id_evento;
+        v_viejo := 'id_evento: ' || :old.id_evento || 
+                   ', id_partido: ' || :old.id_partido || 
+                   ', id_persona: ' || :old.id_persona || 
+                   ', id_persona_relacionada: ' || :old.id_persona_relacionada || 
+                   ', tipo_evento: ' || :old.tipo_evento || 
+                   ', minuto: ' || :old.minuto || 
+                   ', valor_numerico: ' || :old.valor_numerico || 
+                   ', descripcion: ' || :old.descripcion;
     END IF;
 
     INSERT INTO AUDITORIA (id_auditoria, usuario_bd, tabla_afectada, id_registro_afectado, operacion, fecha_hora, valor_anterior, valor_nuevo) 
@@ -193,7 +193,7 @@ CREATE OR REPLACE TRIGGER trg_valida_goles_participacion
 BEFORE INSERT OR UPDATE ON PARTICIPACION_PARTIDO
 FOR EACH ROW
 BEGIN
-    IF :NEW.goles < 0 OR :NEW.goles_penales < 0 THEN
+    IF :new.goles < 0 OR :new.goles_penales < 0 THEN
         RAISE_APPLICATION_ERROR(-20001, 'Error: La cantidad de goles o goles por penales no puede ser negativa.');
     END IF;
 END;
@@ -204,7 +204,7 @@ CREATE OR REPLACE TRIGGER trg_valida_asistencia_estadio
 BEFORE INSERT OR UPDATE ON PARTIDO
 FOR EACH ROW
 BEGIN
-    IF :NEW.asistencia_registrada < 0 THEN
+    IF :new.asistencia_registrada < 0 THEN
         RAISE_APPLICATION_ERROR(-20001, 'Error: La asistencia de público al estadio no puede ser negativa.');
     END IF;
 END;
