@@ -1,4 +1,11 @@
 -- Función diferencia de gol
+select *
+from seleccion;
+select *
+from participacion_partido;
+
+
+
 CREATE OR REPLACE FUNCTION fn_diferencia_gol (
     p_id_seleccion IN NUMBER
 ) RETURN NUMBER IS
@@ -115,7 +122,7 @@ BEGIN
     WHERE id_seleccion = p_id_seleccion
       AND rol = 'JUGADOR';
 
-    IF v_convocados < p_cupo_maximo THEN
+    IF v_convocados <= p_cupo_maximo THEN
         RETURN 1;
     ELSE
         RETURN 0;
@@ -123,7 +130,7 @@ BEGIN
 END fn_validar_cupo_convocatoria;
 /
 
---Selecciones con convocatoria completa
+--Selecciones con convocatoria que excede
 SELECT s.codigo_fifa
 FROM seleccion s
 WHERE fn_validar_cupo_convocatoria(s.id_seleccion, 26) = 0;
