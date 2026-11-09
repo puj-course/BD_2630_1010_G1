@@ -245,7 +245,7 @@
 
 ---
 
-## Semana 13 (25 octubre - 1 noviembre)
+## Semana 9 (25 octubre - 1 noviembre)
 
 ### Objetivos de la semana
 - Hacer las 3 funciones 
@@ -256,8 +256,8 @@
 
 | Tarea | Responsable(s) | Rama utilizada | Descripción |
 |------|------|------|------|
-| Funciones | Jeronimo Lievano | `` | |
-| Procedimientos | Sara Barreto y Jeronimo Lievano | `` | |
-| Triggers | Sara Barreto | `feature/triggers` | |
-| Evidencia Triggers | Sara Barreto | `feature/triggers` | |
-| Documentacion | Jeronimo Lievano, Sara Barreto | `` | |
+| Funciones | Jeronimo Lievano | `develop/semana1_funciones_procedimientos_triggers` | Se hacen las 3 funciones en su documentación |
+| Procedimientos | Sara Barreto y Jeronimo Lievano | `semana1_funciones_procedimientos_triggers` |  |
+| Triggers | Sara Barreto | `feature/triggers` |  |
+| Evidencia Triggers | Sara Barreto | `feature/triggers` |  |
+| Documentacion | Jeronimo Lievano, Sara Barreto | `develop/semana1_funciones_procedimientos_triggers` | Contiene la documentación de todos las funciones, procedimientos y disparadores.  |
