@@ -602,3 +602,19 @@ CREATE INDEX idx_entrada_partido_estado ON ENTRADA (id_partido, estado);
 Justificación: otra busqueda compun es la disponibilidad respecto a las entradas de partidos,
 este indice permite buscar tanto entradas disponibles como vendidas. 
 */
+
+--- =====================
+-- Tabla de paso para procedimiento de carga masiva de resultados de partidos
+--- =====================
+
+CREATE TABLE carga_resultados (
+    id_carga            NUMBER        PRIMARY KEY,
+    id_partido          NUMBER        NOT NULL,
+    goles_local         NUMBER,
+    goles_visitante     NUMBER,
+    penales_local       NUMBER        DEFAULT 0 NOT NULL,
+    penales_visitante   NUMBER        DEFAULT 0 NOT NULL,
+    estado_carga        VARCHAR2(10)  DEFAULT 'PENDIENTE' NOT NULL,
+    mensaje_error       VARCHAR2(300)
+);
+
