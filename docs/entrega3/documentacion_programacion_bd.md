@@ -45,10 +45,10 @@ Retorno: VARCHAR2. Texto con el ranking, una línea por goleador, con el formato
 
 - Cuenta los eventos 'GOL' de evento_partido en los partidos de las etapas de esa edición.
 - Asocia cada jugador a la selección con la que participó en esa edición (la selección cuya id_etapa_grupo pertenece a la edición), para no mezclar goles de otras ediciones.
-- Ordena por goles de forma descendente (desempata por nombre) y toma solo las primeras p_top filas con ROWNUM.
-- Recorre esas filas con un FOR ... LOOP y va armando el texto.
-- Si la edición existe pero no hay goles, devuelve 'Sin goles registrados'.
-- Si la edición no existe, lanza ORA-20002. Si p_top es nulo o menor que 1, lanza ORA-20003.
+- Ordenamo por goles de forma descendente (desempata por nombre) y tomamos solo las primeras p_top filas con ROWNUM.
+- Recorre esas filas con un cursor implicito en un FOR ... LOOP y vamos armando el texto.
+- Si la edición existe pero no hay goles, se devuelve 'Sin goles registrados'.
+- Si la edición no existe, se lanza ORA-20002. Si p_top es nulo o menor que 1, lanza ORA-20003.
 - El texto está limitado a 4000 caracteres.
 
 ---
