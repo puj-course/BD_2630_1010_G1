@@ -4,7 +4,7 @@
 -- ===================================================
 CREATE SEQUENCE seq_auditoria START WITH 1 INCREMENT BY 1; 
 
--- Trigger de Auditoria para PARTIDO
+-- Trigger de auditoria para PARTIDO
 CREATE OR REPLACE TRIGGER trg_auditar_partido 
 AFTER INSERT OR DELETE OR UPDATE ON PARTIDO
 FOR EACH ROW 
@@ -70,7 +70,7 @@ BEGIN
     VALUES (seq_auditoria.NEXTVAL, USER, 'PARTIDO', v_id_registro, v_operacion, SYSTIMESTAMP, v_viejo, v_nuevo);
 END;
 
--- Trigger de auditoria para participación partido 
+-- Trigger de auditoria para PARTICIPACION PARTIDO 
 CREATE OR REPLACE TRIGGER trg_auditar_participacion
 AFTER INSERT OR UPDATE OR DELETE ON PARTICIPACION_PARTIDO
 FOR EACH ROW
@@ -125,7 +125,7 @@ BEGIN
 END;
 /
 
--- Trigger de auditoria para evento partido
+-- Trigger de auditoria para EVENTO PARTIDO
 CREATE OR REPLACE TRIGGER trg_auditar_evento
 AFTER INSERT OR UPDATE OR DELETE ON EVENTO_PARTIDO
 FOR EACH ROW
@@ -188,13 +188,20 @@ END;
 -- TRIGGERS PARA VAIDAR GOLES Y ASISTENCIA POSITIVAS
 -- ===================================================
 
--- Trigger para goles en Participacion partido 
-CREATE OR REPLACE TRIGGER trg_valida_goles_participacion
-BEFORE INSERT OR UPDATE ON PARTICIPACION_PARTIDO
+CREATE OR REPLACE TRIGGER trg_valida_eventos_positivos
+BEFORE INSERT OR UPDATE ON EVENTO_PARTIDO
 FOR EACH ROW
 BEGIN
-    IF :new.goles < 0 OR :new.goles_penales < 0 THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Error: La cantidad de goles o goles por penales no puede ser negativa.');
+    -- Valida que si el evento es un GOL o ASISTENCIA el valor no sea negativo.
+    IF :NEW.tipo_evento IN ('GOL', 'ASISTENCIA', 'MINUTOS_JUGADOS') THEN
+        IF :NEW.valor_numerico < 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Error: El valor para goles o asistencias no puede ser negativo.');
+        END IF;
+    END IF;
+    
+    -- Valida que el minuto de juego no sea negativo
+    IF :NEW.minuto < 0 THEN
+         RAISE_APPLICATION_ERROR(-20002, 'Error: El minuto del evento no puede ser negativo.');
     END IF;
 END;
 /
@@ -205,12 +212,79 @@ BEFORE INSERT OR UPDATE ON PARTIDO
 FOR EACH ROW
 BEGIN
     IF :new.asistencia_registrada < 0 THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Error: La asistencia de público al estadio no puede ser negativa.');
+        RAISE_APPLICATION_ERROR(-20001, 'Error: La asistencia de público no puede ser negativa.');
+    END IF;
+END;
+/
+-- ===================================================
+-- TRIGGER SOBRE PARTICIPANTES DUPLICADOS EN UN PARTIDO 
+-- ===================================================
+CREATE OR REPLACE TRIGGER trg_anti_duplicidad_participacion
+BEFORE INSERT OR UPDATE ON PARTICIPACION_PARTIDO
+FOR EACH ROW
+DECLARE
+    v_conteo INTEGER;
+BEGIN
+    -- Validamos si la misma selección ya está registrada en el mismo partido
+    SELECT COUNT(*)
+    INTO v_conteo
+    FROM PARTICIPACION_PARTIDO
+    WHERE id_partido = :NEW.id_partido
+      AND id_seleccion = :NEW.id_seleccion
+      AND id_participacion_partido != NVL(:NEW.id_participacion_partido, -1); 
+
+    IF v_conteo > 0 THEN
+        RAISE_APPLICATION_ERROR(-20003, 'No duplicados: La selección ya se encuentra registrada participando en este partido.');
+    END IF;
+    
+    -- Validamos que no se repitan condiciones.
+    SELECT COUNT(*)
+    INTO v_conteo
+    FROM PARTICIPACION_PARTIDO
+    WHERE id_partido = :NEW.id_partido
+      AND condicion = :NEW.condicion
+      AND id_participacion_partido != NVL(:NEW.id_participacion_partido, -1);
+
+    IF v_conteo > 0 THEN
+        RAISE_APPLICATION_ERROR(-20004, 'No duplicados: Ya existe un equipo con la condición ' || :NEW.condicion || ' en este partido.');
+    END IF;
+END;
+/   
+
+-- ===================================================
+-- MARCADOR OFICIAL VS. SUMA DE GOLES INDIVIDUALES
+-- ===================================================
+
+CREATE OR REPLACE TRIGGER trg_verifica_consistencia
+BEFORE INSERT OR UPDATE OF goles ON PARTICIPACION_PARTIDO
+FOR EACH ROW
+DECLARE
+    v_goles_individuales INTEGER;
+BEGIN
+    -- Contar los goles registrados individualmente a favor de esta selección en este partido específico
+    SELECT COUNT(*)
+    INTO v_goles_individuales
+    FROM EVENTO_PARTIDO ep
+    JOIN VINCULACION_SELECCION vs ON ep.id_persona = vs.id_persona
+    JOIN ETAPA_COMPETENCIA ec ON vs.id_edicion = ec.id_edicion
+    JOIN PARTIDO p ON p.id_etapa = ec.id_etapa AND p.id_partido = ep.id_partido
+    WHERE ep.id_partido = :NEW.id_partido
+      AND ep.tipo_evento = 'GOL'
+      AND vs.id_seleccion = :NEW.id_seleccion;
+
+    -- Verificar si el marcador que intentan guardar coincide con el conteo de eventos
+    IF :NEW.goles != v_goles_individuales THEN
+        RAISE_APPLICATION_ERROR(
+            -20004, 
+            'Inconsistencia: Los goles del marcador oficial (' || :NEW.goles || 
+            ') no coinciden con la suma de goles individuales (' || v_goles_individuales || ').'
+        );
     END IF;
 END;
 /
 
 
--- ===================================================
--- TRIGGER SOBRE PARTICIPANTES DUPLICADOS EN UN PARTIDO 
--- ===================================================
+
+
+
+
