@@ -3,6 +3,93 @@
 ## Procedimientos
 ## Triggers
 
+## 1. Triggers de Auditoría
+
+> **Dependencia:** Todos los triggers de auditoría utilizan la secuencia `seq_auditoria` (`START WITH 1 INCREMENT BY 1`) para generar la llave primaria `id_auditoria` en la tabla `AUDITORIA`.
+
+### 1.1. `trg_auditar_partido`
+* **Tabla asociada:** `PARTIDO`
+* **Evento y Momento:** `AFTER INSERT OR DELETE OR UPDATE` (`FOR EACH ROW`)
+* **Propósito:** Mantener la trazabilidad histórica en la tabla `AUDITORIA` sobre cualquier creación, modificación o eliminación de partidos en el sistema.
+* **Parámetros / Entradas (`:NEW` y `:OLD`):**
+  * `id_partido`, `id_etapa`, `id_estadio`, `id_partido_origen_1`, `id_partido_origen_2`, `fecha_hora`, `asistencia_registrada`, `estado`, `resultado_origen_1`, `resultado_origen_2`.
+* **Comportamiento esperado:**
+  * En **`INSERT`**: Concatena los valores entrantes (`:NEW`) en `valor_nuevo`, asigna `NULL` a `valor_anterior` y registra la operación `'INSERT'`.
+  * En **`UPDATE`**: Concatena el estado previo (`:OLD`) en `valor_anterior` y el estado actualizado (`:NEW`) en `valor_nuevo`, registrando la operación `'UPDATE'`.
+  * En **`DELETE`**: Concatena los datos eliminados (`:OLD`) en `valor_anterior`, asigna `NULL` a `valor_nuevo` y registra la operación `'DELETE'`.
+  * Inserta automáticamente una fila en `AUDITORIA` con el usuario actual (`USER`) y la marca de tiempo (`SYSTIMESTAMP`).
+
+### 1.2. `trg_auditar_participacion`
+* **Tabla asociada:** `PARTICIPACION_PARTIDO`
+* **Evento y Momento:** `AFTER INSERT OR UPDATE OR DELETE` (`FOR EACH ROW`)
+* **Propósito:** Auditar todos los cambios realizados sobre la participación de las selecciones en los partidos y sus marcadores oficiales.
+* **Parámetros / Entradas (`:NEW` y `:OLD`):**
+  * `id_participacion_partido`, `id_partido`, `id_seleccion`, `condicion`, `goles`, `goles_penales`, `resultado`.
+* **Comportamiento esperado:**
+  * Evalúa la acción ejecutada (`INSERTING`, `UPDATING`, `DELETING`), construye las cadenas de texto descriptivas para `valor_anterior` y/o `valor_nuevo` con todos los campos de la fila y registra el movimiento en `AUDITORIA` bajo la tabla afectada `'PARTICIPACION_PARTIDO'`.
+
+### 1.3. `trg_auditar_evento`
+* **Tabla asociada:** `EVENTO_PARTIDO`
+* **Evento y Momento:** `AFTER INSERT OR UPDATE OR DELETE` (`FOR EACH ROW`)
+* **Propósito:** Registrar en la bitácora de auditoría cada vez que se añade, modifica o elimina una incidencia o estadística individual (goles, asistencias, tarjetas, sustituciones, minutos jugados) en un partido.
+* **Parámetros / Entradas (`:NEW` y `:OLD`):**
+  * `id_evento`, `id_partido`, `id_persona`, `id_persona_relacionada`, `tipo_evento`, `minuto`, `valor_numerico`, `descripcion`.
+* **Comportamiento esperado:**
+  * Captura los valores previos (`:OLD`) y nuevos (`:NEW`) según el tipo de operación DML y almacena el registro detallado en la tabla `AUDITORIA` indicando `'EVENTO_PARTIDO'` como tabla afectada.
+
+---
+
+## 2. Triggers de Validación de Rangos
+
+### 2.1. `trg_valida_eventos_positivos`
+* **Tabla asociada:** `EVENTO_PARTIDO`
+* **Evento y Momento:** `BEFORE INSERT OR UPDATE` (`FOR EACH ROW`)
+* **Propósito:** Impedir el registro de estadísticas individuales con valores numéricos negativos o minutos de juego inválidos.
+* **Parámetros / Entradas (`:NEW`):**
+  * `:NEW.tipo_evento`, `:NEW.valor_numerico`, `:NEW.minuto`.
+* **Comportamiento esperado:**
+  * Si `tipo_evento` es `'GOL'`, `'ASISTENCIA'` o `'MINUTOS_JUGADOS'` y `:NEW.valor_numerico < 0`, aborta la operación y lanza la excepción `ORA-20001: Error: El valor para goles o asistencias no puede ser negativo.`
+  * Si `:NEW.minuto < 0`, aborta la operación y lanza la excepción `ORA-20002: Error: El minuto del evento no puede ser negativo.`
+
+### 2.2. `trg_valida_asistencia_estadio`
+* **Tabla asociada:** `PARTIDO`
+* **Evento y Momento:** `BEFORE INSERT OR UPDATE` (`FOR EACH ROW`)
+* **Propósito:** Garantizar que la asistencia de público registrada en un partido sea siempre un número mayor o igual a cero.
+* **Parámetros / Entradas (`:NEW`):**
+  * `:NEW.asistencia_registrada`.
+* **Comportamiento esperado:**
+  * Si `:NEW.asistencia_registrada < 0`, detiene el `INSERT` o `UPDATE` y arroja el error `ORA-20001: Error: La asistencia de público no puede ser negativa.`
+
+---
+
+## 3. Trigger de Anti-duplicidad
+
+### 3.1. `trg_anti_duplicidad_participacion`
+* **Tabla asociada:** `PARTICIPACION_PARTIDO`
+* **Evento y Momento:** `BEFORE INSERT OR UPDATE` (`FOR EACH ROW`)
+* **Propósito:** Prevenir que una misma selección sea inscrita dos veces en el mismo encuentro o que dos selecciones ocupen la misma condición (`LOCAL` o `VISITANTE`) en un partido.
+* **Parámetros / Entradas (`:NEW`):**
+  * `:NEW.id_participacion_partido`, `:NEW.id_partido`, `:NEW.id_seleccion`, `:NEW.condicion`.
+* **Comportamiento esperado:**
+  * Consulta `PARTICIPACION_PARTIDO` excluyendo el propio registro (`id_participacion_partido != NVL(:NEW.id_participacion_partido, -1)`).
+  * Si la selección ya participa en ese partido (`v_conteo > 0`), lanza el error `ORA-20003: No duplicados: La selección ya se encuentra registrada participando en este partido.`
+  * Si ya existe un equipo con la misma condición (`LOCAL` o `VISITANTE`) en ese partido, lanza el error `ORA-20004: No duplicados: Ya existe un equipo con la condición [CONDICION] en este partido.`
+
+---
+
+## 4. Trigger de Consistencia
+
+### 4.1. `trg_verifica_consistencia`
+* **Tabla asociada:** `PARTICIPACION_PARTIDO`
+* **Evento y Momento:** `BEFORE INSERT OR UPDATE OF goles` (`FOR EACH ROW`)
+* **Propósito:** Asegurar que el marcador oficial (`goles`) asignado a una selección en un partido coincida exactamente con el conteo de eventos individuales de tipo `'GOL'` registrados en `EVENTO_PARTIDO` para los jugadores de dicha selección.
+* **Parámetros / Entradas (`:NEW`):**
+  * `:NEW.id_partido`, `:NEW.id_seleccion`, `:NEW.goles`.
+* **Comportamiento esperado:**
+  * Realiza un `COUNT(*)` sobre `EVENTO_PARTIDO` cruzando con `VINCULACION_SELECCION`, `ETAPA_COMPETENCIA` y `PARTIDO` para contar los goles individuales anotados por jugadores de `:NEW.id_seleccion` en `:NEW.id_partido`.
+  * Si `:NEW.goles` es diferente de `v_goles_individuales`, rechaza el cambio y lanza el error `ORA-20004: Inconsistencia: Los goles del marcador oficial (X) no coinciden con la suma de goles individuales (Y).`
+
+---
 
 # Funciones
 ## 1. `fn_diferencia_gol`
