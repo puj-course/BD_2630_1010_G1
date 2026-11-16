@@ -1,4 +1,4 @@
-package constantes;
+package configuracion;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,5 +23,4 @@ public class Constantes {
             throw new RuntimeException("Error al cargar configuracion.properties", e);
         }
     }
-
 }
