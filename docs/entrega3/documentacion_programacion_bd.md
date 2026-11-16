@@ -5,8 +5,6 @@
 
 ## 1. Triggers de Auditoría
 
-> **Dependencia:** Todos los triggers de auditoría utilizan la secuencia `seq_auditoria` (`START WITH 1 INCREMENT BY 1`) para generar la llave primaria `id_auditoria` en la tabla `AUDITORIA`.
-
 ### 1.1. `trg_auditar_partido`
 * **Tabla asociada:** `PARTIDO`
 * **Evento y Momento:** `AFTER INSERT OR DELETE OR UPDATE` (`FOR EACH ROW`)
