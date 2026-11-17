@@ -1,0 +1,3 @@
+db.user=TU_USUARIO_ORACLE
+db.password=TU_CONTRASEÑA_ORACLE
+db.url=jdbc:oracle:thin:@orion.javeriana.edu.co:1521/LAB
