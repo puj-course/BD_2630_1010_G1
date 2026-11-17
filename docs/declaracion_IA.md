@@ -11,3 +11,8 @@ Si embargo también se uso para los documentos md anteriores.
 Cabe aclarar que fue el único uso que se hizo por mi parte. 
 
 Muchas gracias 
+
+### Jerónimo - Ciencia de datos
+Uso de Ia:
+En el desarrollo de la app especificamente en el frontend, use IA para apoyarme y dar una buena interfaz de la app.
+En el desarrollo de la documentacion para estructurar y ser claro en la documentación.
