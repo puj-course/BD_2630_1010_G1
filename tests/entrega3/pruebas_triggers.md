@@ -7,8 +7,8 @@ A continuación se presentan las sentencias SQL para comprobar el funcionamiento
 ## 1. Tests para Validación de Rangos (Eventos y Asistencia de Estadio)
 
 ### Test 1.1: Intentar insertar un gol con `valor_numerico` negativo
-* **Trigger evaluado:** `trg_valida_eventos_positivos`[cite: 31]
-* **Comportamiento esperado:** Debe fallar con `ORA-20001`[cite: 31].
+* **Trigger evaluado:** `trg_valida_eventos_positivos`
+* **Comportamiento esperado:** Debe fallar con `ORA-20001`.
 
 **Sentencia SQL:**
 ```sql
@@ -39,8 +39,8 @@ https://docs.oracle.com/error-help/db/ora-04088/
 ---
 
 ### Test 1.2: Intentar insertar un evento con `minuto` negativo
-* **Trigger evaluado:** `trg_valida_eventos_positivos`[cite: 31]
-* **Comportamiento esperado:** Debe fallar con `ORA-20002`[cite: 31].
+* **Trigger evaluado:** `trg_valida_eventos_positivos`
+* **Comportamiento esperado:** Debe fallar con `ORA-20002`.
 
 **Sentencia SQL:**
 ```sql
@@ -70,8 +70,8 @@ https://docs.oracle.com/error-help/db/ora-04088/
 ---
 
 ### Test 1.3: Intentar insertar o actualizar un partido con asistencia negativa
-* **Trigger evaluado:** `trg_valida_asistencia_estadio`[cite: 31]
-* **Comportamiento esperado:** Debe fallar con `ORA-20001`[cite: 31].
+* **Trigger evaluado:** `trg_valida_asistencia_estadio`
+* **Comportamiento esperado:** Debe fallar con `ORA-20001`.
 
 **Sentencia SQL:**
 ```sql
@@ -107,8 +107,8 @@ https://docs.oracle.com/error-help/db/ora-04098/
 ## 2. Tests para No duplicidad en `PARTICIPACION_PARTIDO`
 
 ### Test 2.1: Intentar registrar nuevamente a Argentina (`id_seleccion = 1`) en el partido 1
-* **Trigger evaluado:** `trg_anti_duplicidad_participacion`[cite: 31]
-* **Comportamiento esperado:** Debe fallar con `ORA-20003`[cite: 31].
+* **Trigger evaluado:** `trg_anti_duplicidad_participacion`
+* **Comportamiento esperado:** Debe fallar con `ORA-20003`.
 
 **Sentencia SQL:**
 ```sql
@@ -138,8 +138,8 @@ https://docs.oracle.com/error-help/db/ora-04088/
 ---
 
 ### Test 2.2: Intentar registrar una selección distinta en el partido 1 con condición `'LOCAL'` ya ocupada
-* **Trigger evaluado:** `trg_anti_duplicidad_participacion`[cite: 31]
-* **Comportamiento esperado:** Debe fallar con `ORA-20004`[cite: 31].
+* **Trigger evaluado:** `trg_anti_duplicidad_participacion`
+* **Comportamiento esperado:** Debe fallar con `ORA-20004`.
 
 **Sentencia SQL:**
 ```sql
@@ -171,8 +171,8 @@ https://docs.oracle.com/error-help/db/ora-04088/
 ## 3. Tests para Consistencia de Marcador (Marcador vs. Goles Individuales)
 
 ### Test 3.1: Actualizar goles oficiales de Argentina en el partido 1 a 5 (solo tiene 2 goles en `EVENTO_PARTIDO`)
-* **Trigger evaluado:** `trg_verifica_consistencia`[cite: 31]
-* **Comportamiento esperado:** Debe fallar con `ORA-20004`[cite: 31].
+* **Trigger evaluado:** `trg_verifica_consistencia`
+* **Comportamiento esperado:** Debe fallar con `ORA-20004`.
 
 **Sentencia SQL:**
 ```sql
@@ -204,8 +204,8 @@ https://docs.oracle.com/error-help/db/ora-04088/
 ---
 
 ### Test 3.2: Insertar una participación en el partido 6 con 3 goles cuando no hay eventos de gol registrados
-* **Trigger evaluado:** `trg_verifica_consistencia`[cite: 31]
-* **Comportamiento esperado:** Debe fallar con `ORA-20004`[cite: 31].
+* **Trigger evaluado:** `trg_verifica_consistencia`
+* **Comportamiento esperado:** Debe fallar con `ORA-20004`.
 
 **Sentencia SQL:**
 ```sql
@@ -237,7 +237,7 @@ https://docs.oracle.com/error-help/db/ora-04088/
 ## 4. Tests para Triggers de Auditoría (Operaciones Válidas y Verificación)
 
 ### Test 4.1: Actualizar estado y asistencia válida en `PARTIDO`
-* **Trigger evaluado:** `trg_auditar_partido`[cite: 31]
+* **Trigger evaluado:** `trg_auditar_partido`
 
 **Sentencia SQL:**
 ```sql
@@ -270,7 +270,7 @@ https://docs.oracle.com/error-help/db/ora-04098/
 ---
 
 ### Test 4.2: Insertar y eliminar un evento válido en `EVENTO_PARTIDO`
-* **Trigger evaluado:** `trg_auditar_evento`[cite: 31]
+* **Trigger evaluado:** `trg_auditar_evento`
 
 **Sentencia SQL:**
 ```sql
@@ -292,7 +292,7 @@ DELETE FROM EVENTO_PARTIDO WHERE id_evento = 905;
 ---
 
 ### Test 4.3: Insertar una participación válida (0 goles en partido sin goles)
-* **Trigger evaluado:** `trg_auditar_participacion`[cite: 31]
+* **Trigger evaluado:** `trg_auditar_participacion`
 
 **Sentencia SQL:**
 ```sql
