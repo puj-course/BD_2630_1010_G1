@@ -261,3 +261,40 @@
 | Triggers | Sara Barreto | `feature/triggers` | Se hicieron los 3 trigger establecidos en el doc. del proyecto. |
 | Evidencia Triggers | Sara Barreto | `feature/triggers` | Se hicieron las pruebas de funcionamiento de cada trigger |
 | Documentacion | Jeronimo Lievano, Sara Barreto | `develop/semana1_funciones_procedimientos_triggers` | Contiene la documentación de todos las funciones, procedimientos y disparadores.  |
+
+### Problemas encontrados
+
+---
+
+## Semana 10 (1 noviembre - 8 noviembre)
+
+### Objetivos de la semana
+- Estructura base del proyecto 
+- Administracion de catálogo
+- Stack tecnológico
+
+| Tarea | Responsable(s) | Rama utilizada | Descripción |
+|------|------|------|------|
+| Estructura base | Jeronimo Lievano | `develop/app` | Se hizo la estructura de la base en java|
+| Admin. catálogo | Jeronimo Lievano | `develop/app` | Se creo la administración del catálogo.  |
+| Stack | Jerónimo Lievano | `develop/app` | Se hizo todo el stack tecnológico usado para el desarrollo. |
+
+### Problemas encontrados
+
+---
+
+## Semana 10 (8 noviembre - 17 noviembre)
+
+### Objetivos de la semana
+- Aplicacion funcional completa 
+- Reportes de la aplicación
+- Verificacion proyecto completo
+
+| Tarea | Responsable(s) | Rama utilizada | Descripción |
+|------|------|------|------|
+|App funcional  | Jeronimo Lievano | `develop/app` | Se verificaron las 3 funcionalidades principales|
+|Reportes de la app | Jeronimo Lievano | `develop/app` | Se hicieron los reportes del funcionamiento de la app  |
+| Verificacion proyecto completo | Jerónimo Lievano y Sara Barreto | - | Se reviso la completitud del proyecto |
+
+### Problemas encontrados
+- Se perdió información en un merge conflict, toco repetir algunos procedimientos. 
