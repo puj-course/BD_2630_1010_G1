@@ -214,3 +214,33 @@ END;
 -- ===================================================
 -- TRIGGER SOBRE PARTICIPANTES DUPLICADOS EN UN PARTIDO 
 -- ===================================================
+
+CREATE OR REPLACE TRIGGER trg_anti_duplicidad_participacion
+BEFORE INSERT ON PARTICIPACION_PARTIDO
+FOR EACH ROW
+DECLARE
+    v_conteo INTEGER;
+BEGIN
+    SELECT COUNT(*)
+    INTO v_conteo
+    FROM PARTICIPACION_PARTIDO
+    WHERE id_partido = :NEW.id_partido
+      AND id_seleccion = :NEW.id_seleccion
+      AND id_participacion_partido != NVL(:NEW.id_participacion_partido, -1); 
+
+    IF v_conteo > 0 THEN
+        RAISE_APPLICATION_ERROR(-20003, 'No duplicados: La selección ya se encuentra registrada participando en este partido.');
+    END IF;
+    
+    SELECT COUNT(*)
+    INTO v_conteo
+    FROM PARTICIPACION_PARTIDO
+    WHERE id_partido = :NEW.id_partido
+      AND condicion = :NEW.condicion
+      AND id_participacion_partido != NVL(:NEW.id_participacion_partido, -1);
+
+    IF v_conteo > 0 THEN
+        RAISE_APPLICATION_ERROR(-20004, 'No duplicados: Ya existe un equipo con la condición ' || :NEW.condicion || ' en este partido.');
+    END IF;
+END;
+/
