@@ -16,7 +16,7 @@ public class EtapaCompetenciaDaoImpl implements EtapaCompetenciaDao {
     @Override
     public EtapaCompetencia obtenerPorIdEtapa(int idEtapa) {
         StringBuilder sql = new StringBuilder("SELECT id_etapa, id_edicion, id_etapa_padre, nombre, tipo_etapa, orden");
-        sql.append(" FROM EtapaCompetencia WHERE id_etapa = ?");
+        sql.append(" FROM ETAPA_COMPETENCIA WHERE id_etapa = ?");
         try(Connection conn = ConexionBD.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql.toString())){
 
@@ -41,7 +41,7 @@ public class EtapaCompetenciaDaoImpl implements EtapaCompetenciaDao {
 
     @Override
     public int actualizarEtapaCompetencia(EtapaCompetencia etapa) {
-        StringBuilder sql = new StringBuilder("UPDATE EtapaCompetencia SET id_edicion = ?, id_etapa_padre = ?, ");
+        StringBuilder sql = new StringBuilder("UPDATE ETAPA_COMPETENCIA SET id_edicion = ?, id_etapa_padre = ?, ");
         sql.append("nombre = ?, tipo_etapa = ?, orden = ? WHERE id_etapa = ?");
 
         try(Connection conn = ConexionBD.getConnection();
@@ -63,7 +63,7 @@ public class EtapaCompetenciaDaoImpl implements EtapaCompetenciaDao {
 
     @Override
     public int eliminarEtapa(int id_etapa){
-        String sql = "DELETE FROM EtapaCompetencia WHERE id_etapa = ?";
+        String sql = "DELETE FROM ETAPA_COMPETENCIA WHERE id_etapa = ?";
         try(Connection conn = ConexionBD.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)){
 
@@ -77,7 +77,7 @@ public class EtapaCompetenciaDaoImpl implements EtapaCompetenciaDao {
 
     @Override
     public void guardarEtapa(EtapaCompetencia etapa) {
-        StringBuilder sql = new StringBuilder("INSERT INTO EtapaCompetencia (id_etapa, id_edicion, id_etapa_padre, nombre, tipo_etapa, orden)");
+        StringBuilder sql = new StringBuilder("INSERT INTO ETAPA_COMPETENCIA (id_etapa, id_edicion, id_etapa_padre, nombre, tipo_etapa, orden)");
         sql.append(" VALUES (?, ?, ?, ?, ?, ?)");
         try(Connection conn = ConexionBD.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql.toString())){
@@ -99,7 +99,7 @@ public class EtapaCompetenciaDaoImpl implements EtapaCompetenciaDao {
     public List obtenerTodasEtapaCompetencia(){
         List<EtapaCompetencia> lista = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT id_etapa, id_edicion, id_etapa_padre, nombre, tipo_etapa, orden");
-        sql.append(" FROM EtapaCompetencia");
+        sql.append(" FROM ETAPA_COMPETENCIA");
 
         try(Connection conn = ConexionBD.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql.toString());
